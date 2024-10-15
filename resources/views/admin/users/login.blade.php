@@ -39,7 +39,7 @@
                 <input type="email" name="email" placeholder="Email">
                 <input type="password" name="password" placeholder="Password">
                 
-                @include("admin.users.alert")
+                @include("admin.alert")
 
                 <a href="#">Forget Your Password?</a>
                 <button type="submit">Sign In</button>
