@@ -13,7 +13,7 @@
                                 <li class="nav-item"> <a href="{{route('menu.add') }}" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
                                         <p>Thêm Danh Mục</p>
                                     </a> </li>
-                                <li class="nav-item"> <a href="{{route('menu.index')  }}" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
+                                <li class="nav-item"> <a href="{{route('menu.list')  }}" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
                                         <p>Danh Sách Danh Mục</p>
                                     </a> </li>
                                 

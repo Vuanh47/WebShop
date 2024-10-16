@@ -19,11 +19,16 @@
 
                 foreach ($menus as $key => $menu) {
                     if ($menu->parent_id == $parent_id) {
+                        // Kiểm tra giá trị active và tạo HTML tương ứng
+                        $activeButton = $menu->active == 1 
+                            ? '<button class="btn btn-success btn-sm">Yes</button>' 
+                            : '<button class="btn btn-danger btn-sm">No</button>';
+                
                         $html .= '
                             <tr>
                                 <td>' . $menu->id . '</td>
                                 <td>' . $char . $menu->name . '</td>
-                                <td>' . $menu->active . '</td>
+                                <td>' . $activeButton . '</td>
                                 <td>' . $menu->updated_at . '</td>
                                 <td>
                                     <a href="' . route('menu.edit', $menu->id) . '" class="btn btn-warning btn-sm" title="Sửa">
@@ -39,11 +44,12 @@
                                 </td>
                             </tr>
                         ';
-
+                
                         unset($menus[$key]);
                         $html .= renderMenu($menus, $menu->id, $char . '--'); // Gọi lại hàm để render menu con
                     }
                 }
+                
 
                 return $html; // Trả về chuỗi HTML
             }

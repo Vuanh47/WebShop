@@ -21,11 +21,11 @@ Route::middleware('admin')->group(function () {
         Route::prefix('menu')->group(function(){
             Route::get('add', [MenuController::class , 'creat'])->name('menu.add');
             Route::post('add', [MenuController::class , 'store'])->name('menu.store');
-            Route::get('list', [MenuController::class , 'index'])->name('menu.index');
-            Route::get('/menus/{id}/edit', [MenuController::class, 'edit'])->name('menu.edit');
+            Route::get('list', [MenuController::class , 'index'])->name('menu.list');
+            Route::get('{id}/edit', [MenuController::class, 'edit'])->name('menu.edit');
            // Định nghĩa route cho cập nhật menu
-            Route::put('/menus/{id}', [MenuController::class, 'update'])->name('menu.update');
-            Route::delete('/menus/{id}', [MenuController::class, 'destroy'])->name('menu.destroy');
+            Route::put('{id}', [MenuController::class, 'update'])->name('menu.update');
+            Route::delete('{id}', [MenuController::class, 'destroy'])->name('menu.destroy');
 
         });
     });

@@ -39,8 +39,15 @@ class MenuController extends Controller
 
     public function edit($id)
     {
-        $menus = Menu::findOrFail($id);
-        return view('admin.menu.list', compact('menus'));
+        $menu = Menu::findOrFail($id);
+        $menus = Menu::all(); // Danh sách tất cả các danh mục
+        return view('admin.menu.edit', [
+            'menu' => $menu, // Truyền danh mục hiện tại
+            'menus' => $menus, // Truyền danh sách các danh mục
+            'title' => 'Chỉnh sửa Danh Mục'
+        ]);
+        
+
     }
 
     public function update(Request $request, $id)
@@ -48,14 +55,14 @@ class MenuController extends Controller
         // Xử lý cập nhật menu
         $menu = Menu::findOrFail($id);
         $menu->update($request->all());
-        return redirect()->route('menu.index')->with('success', 'Menu updated successfully!');
+        return redirect()->route('menu.list')->with('success', 'Menu updated successfully!');
     }
 
     public function destroy($id)
     {
         $menu = Menu::findOrFail($id);
         $menu->delete();
-        return redirect()->route('menu.index')->with('success', 'Menu deleted successfully!');
+        return redirect()->route('menu.list')->with('success', 'Menu deleted successfully!');
     }
 
 }

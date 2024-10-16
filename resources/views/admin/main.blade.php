@@ -28,9 +28,9 @@
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-end">
-                                <li class="breadcrumb-item"><a href="{{route('menu.index')  }}">Trang Chủ</a></li>
+                                <li class="breadcrumb-item"><a href="{{route('menu.list')  }}">Trang Chủ</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">
-                                    Dashboard
+                                  {{$title}}  
                                 </li>
                             </ol>
                         </div>
