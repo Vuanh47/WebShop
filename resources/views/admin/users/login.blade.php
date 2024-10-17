@@ -62,7 +62,7 @@
         </div>
     </div>
 
-    <script src="{{ asset('admin/jss/script.js') }}"></script>
+    <script src="{{ asset('admin/js/script.js') }}"></script>
 
 </body>
 

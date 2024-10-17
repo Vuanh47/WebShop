@@ -17,7 +17,7 @@ class MenuController extends Controller
         $this->menuService = $menuService;
     }
 
-    public function creat(){
+    public function create(){
         return view('admin.menu.add',[
             'title' => 'Thêm Danh Mục',
             'menus' => $this->menuService->getParent(),
