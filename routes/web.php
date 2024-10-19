@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\UploadController;
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Users\LoginController;
+use App\Http\Controllers\Admin\Users\RegisterController;
 use App\Http\Controllers\MainCotroller;
 use App\Http\Middleware\EnsureUserIsAuthenticated;
 
@@ -15,6 +16,8 @@ use App\Http\Middleware\EnsureUserIsAuthenticated;
 Route::get('admin/user/login', [LoginController::class, 'index'])->name('login');
 
 Route::post('admin/user/login/store',[LoginController::class, 'store']);
+Route::post('admin/user/register/store',[RegisterController::class, 'register'])->name('register');
+
 
 Route::get('/', [MainCotroller::class, 'index'])->name('index');
 

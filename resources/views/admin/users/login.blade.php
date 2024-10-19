@@ -11,7 +11,7 @@
 
     <div class="container" id="container">
         <div class="form-container sign-up">
-            <form >
+            <form method="post" action="{{route('register')}}">
                 <h1>Create Account</h1>
                 <div class="social-icons">
                     <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
@@ -24,6 +24,7 @@
                 <input type="email" name="email" placeholder="Email">
                 <input type="password" name="password" placeholder="Password">
                 <button>Sign Up</button>
+                @csrf
             </form >
         </div>
         <div class="form-container sign-in">
