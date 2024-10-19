@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Menu\CreatFormRequest;
+use App\Http\Requests\Menu\CreateFormRequest;
 use App\Http\Service\Menu\MenuService;
 use App\Models\Menu;
 use Illuminate\Http\Request;
@@ -24,7 +24,7 @@ class MenuController extends Controller
         ]);
     }
 
-    public function store(CreatFormRequest $request){
+    public function store(CreateFormRequest $request){
        $result = $this->menuService->creat($request);
 
        return redirect()->back();

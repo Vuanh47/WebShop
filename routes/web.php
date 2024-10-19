@@ -3,10 +3,12 @@
 use App\Http\Controllers\Admin\MainController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\UploadController;
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Users\LoginController;
+use App\Http\Controllers\MainCotroller;
 use App\Http\Middleware\EnsureUserIsAuthenticated;
 
 
@@ -14,6 +16,7 @@ Route::get('admin/user/login', [LoginController::class, 'index'])->name('login')
 
 Route::post('admin/user/login/store',[LoginController::class, 'store']);
 
+Route::get('/', [MainCotroller::class, 'index'])->name('index');
 
 Route::middleware('admin')->group(function () {
      
@@ -38,9 +41,27 @@ Route::middleware('admin')->group(function () {
         Route::prefix('product')->group(function(){
             Route::get('add', [ProductController::class , 'create'])->name('product.add');
             Route::post('add', [ProductController::class , 'store'])->name('product.store');
+            Route::get('list', [ProductController::class , 'index'])->name('product.list');
+            Route::get('{id}/edit', [ProductController::class, 'edit'])->name('product.edit');
+            Route::put('{id}', [ProductController::class, 'update'])->name('product.update');
+            Route::delete('{id}', [ProductController::class, 'destroy'])->name('product.destroy');
+
         });
 
-        #upload
+    
+        #slider
+        Route::prefix('slider')->group(function(){
+            Route::get('add', [SliderController::class , 'create'])->name('slider.add');
+            Route::post('add', [SliderController::class , 'store'])->name('slider.store');
+            Route::get('list', [SliderController::class , 'index'])->name('slider.list');
+            Route::get('{id}/edit', [SliderController::class, 'edit'])->name('slider.edit');
+            Route::put('{id}', [SliderController::class, 'update'])->name('slider.update');
+            Route::delete('{id}', [SliderController::class, 'destroy'])->name('slider.destroy');
+
+        });
+
+
+        #upload img
         Route::post('upload/services', [UploadController::class, 'update'])->name('upload.services');
 
 

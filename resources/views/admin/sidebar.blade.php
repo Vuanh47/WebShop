@@ -3,7 +3,7 @@
             <div class="sidebar-wrapper">
                 <nav class="mt-2"> <!--begin::Sidebar Menu-->
                     <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu" data-accordion="false">
-                        <li class="nav-item menu-open"> <a href="#" class="nav-link active"> <i class="nav-icon bi bi-speedometer"></i>
+                        <li class="nav-item menu-open"> <a href="#" class="nav-link active"><i class="fa-solid fa-bars"></i></i>
                                 <p>
                                     Danh Mục
                                     <i class="nav-arrow bi bi-chevron-right"></i>
@@ -15,6 +15,46 @@
                                     </a> </li>
                                 <li class="nav-item"> <a href="{{route('menu.list')  }}" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
                                         <p>Danh Sách Danh Mục</p>
+                                    </a> </li>
+                                
+                            </ul>
+                        </li>
+                    
+                    </ul> <!--end::Sidebar Menu-->
+
+                    <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="product" data-accordion="false">
+                        <li class="nav-item menu-open"> <a href="#" class="nav-link active"> <i class="fa-solid fa-shop"></i></i>
+                                <p>
+                                    Sản Phẩm
+                                    <i class="nav-arrow bi bi-chevron-right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item"> <a href="{{route('product.add') }}" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
+                                        <p>Thêm Sản Phẩm</p>
+                                    </a> </li>
+                                <li class="nav-item"> <a href="{{route('product.list')  }}" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
+                                        <p>Danh Sách  Sản Phẩm</p>
+                                    </a> </li>
+                                
+                            </ul>
+                        </li>
+                    
+                    </ul> <!--end::Sidebar product-->
+
+                    <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="product" data-accordion="false">
+                        <li class="nav-item menu-open"> <a href="#" class="nav-link active"> <i class="fa-regular fa-images"></i></i>
+                                <p>
+                                    Slider
+                                    <i class="nav-arrow bi bi-chevron-right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item"> <a href="{{route('slider.add') }}" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
+                                        <p>Thêm  Slider</p>
+                                    </a> </li>
+                                <li class="nav-item"> <a href="{{route('slider.list')  }}" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
+                                        <p>Danh Sách Slider</p>
                                     </a> </li>
                                 
                             </ul>

@@ -14,8 +14,12 @@ class UploadController extends Controller
             $file = $request->file('thumb');
             $filename = time() . '.' . $file->getClientOriginalExtension();
             $path = $file->storeAs('uploads', $filename, 'public');
-            
-            return response()->json(['success' => 'Ảnh đã được tải lên thành công!', 'filePath' => $path]);
+            $thumb = str_replace('uploads/', '', $path);
+            return response()->json([
+                'success' => 'Ảnh đã được tải lên thành công!',
+                'filePath' => $path,
+                'thumb' => $thumb
+            ]);
         }
     
         return response()->json(['error' => 'Không tìm thấy file!'], 400);

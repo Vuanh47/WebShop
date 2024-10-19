@@ -21,10 +21,12 @@
                         </div>
                     
                         <div class="col-md-6 form-group mb-3"> 
-                            <label for="menu_id" class="form-label">Danh Mục</label> 
-                            <select name="menu_id" id="menu_id" class="form-control">
-                                <option value="">Giáo Án Tham Khảo</option>
-                            </select>
+                            <label for="category" class="form-label">Danh Mục</label> 
+                            <select name="category" id="category" class="form-control">
+                                @foreach ($menus as $menu)
+                                    <option value="{{$menu->name}}">{{$menu->name}}</option>
+                                @endforeach
+                            </select>  
                         </div>
                 </div>
 
@@ -35,7 +37,7 @@
                         </div>
                     
                        <div class="col-md-6 form-group mb-3"> 
-                            <label for="price_sale" class="form-label">Giảm Giá</label> 
+                            <label for="price_sale" class="form-label">Giá Khuyến Mãi</label> 
                             <input type="number" name="price_sale" class="form-control" id="price_sale">
                         </div>
                 </div>
@@ -52,8 +54,11 @@
 
                 <label for="thumb" class="form-label">Chọn Ảnh</label>
                 <div class="mb-3">
-                    <input type="file" id="imageUpload" name="thumb" accept=".png, .jpg, .jpeg" onchange="previewImage(this)">
+                    <input type="file" id="imageUpload" name="thumb_path" accept=".png, .jpg, .jpeg" onchange="previewImage(this)">
                 </div>
+
+                <!-- Trường ẩn để lưu đường dẫn ảnh sau khi tải lên -->
+                <input type="hidden" name="thumb" id="thumb">
 
                 <div class="avatar-preview">
                     <!-- Hiển thị ảnh từ server hoặc ảnh mặc định -->
@@ -129,6 +134,10 @@
 
                     // Cập nhật background-image của div#imagePreview
                     document.getElementById('imagePreview').style.backgroundImage = 'url(' + imageUrl + ')';
+
+                    // Cập nhật giá trị của input ẩn
+                    document.getElementById('thumb').value = data.thumb;
+                    console.log('Thành công:', data.thumb);
 
                 }
             })
