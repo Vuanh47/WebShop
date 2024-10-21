@@ -2,7 +2,7 @@
 <html class="no-js" lang="zxx">
     
 <!-- 40432:14-->
-<head>
+    <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>404 Error || limupa - Digital Products Store eCommerce Bootstrap 4 Template</title>
