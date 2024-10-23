@@ -5,6 +5,7 @@ namespace App\Http\Service\Product;
 use App\Models\Product;
 
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Session;
 
@@ -15,8 +16,9 @@ use Illuminate\Support\Facades\Session;
     }
 
     public function getAll(){
-      return Product::orderByDesc('id')->paginate(20);
+      return Product::orderByDesc('id')->paginate(8);
   }
+
     public function creat($request){
       try {
 

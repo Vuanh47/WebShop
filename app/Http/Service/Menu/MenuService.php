@@ -12,11 +12,16 @@ class MenuService{
     public function getParent(){
         return Menu::where('parent_id',0)->get();
     }
+    public function getParent1()
+    {
+        return Menu::where('parent_id', 0); // Trả về truy vấn Eloquent
+    }
+
 
     public function getAll(){
         return Menu::orderByDesc('id')->paginate(20);
     }
-    public function creat($request){
+    public function creat($request){    
         try {
 
              // Kiểm tra xem danh mục đã tồn tại chưa
