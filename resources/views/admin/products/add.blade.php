@@ -33,12 +33,12 @@
                 <div class="row">
                        <div class="col-md-6 form-group mb-3"> 
                             <label for="price" class="form-label">Giá Gốc</label> 
-                            <input type="number" name="price" class="form-control" id="price" placeholder="">
+                            <input type="text" name="price" class="form-control" id="price" placeholder="Nhập giá Gốc">
                         </div>
                     
                        <div class="col-md-6 form-group mb-3"> 
                             <label for="price_sale" class="form-label">Giá Khuyến Mãi</label> 
-                            <input type="number" name="price_sale" class="form-control" id="price_sale">
+                            <input type="text" name="price_sale" class="form-control" id="price_sale" placeholder="Nhập giá Khuyến Mãi">
                         </div>
                 </div>
 

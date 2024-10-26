@@ -86,6 +86,7 @@ a {
 a:hover {
 	color: #fed700;
 }
+
 .scroll-right {
     background-color: transparent;
     border: none;
@@ -5466,6 +5467,33 @@ span.required {
 	border: 0;
 	
 }
+.price-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.new-price {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #e74c3c; /* Màu nổi bật cho giá khuyến mãi */
+}
+
+.old-price {
+    font-size: 1em;
+    color: #999;
+    text-decoration: line-through;
+}
+
+.discount-percentage {
+    background-color: #dfe6e5;
+    color: #b5282a;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
 /*----------------------------------------------------------------------------------------------------*/
 /*------------------------------------------> The End <-----------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------*/

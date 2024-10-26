@@ -9,11 +9,19 @@
 	<![endif]-->
         <!-- Begin Body Wrapper -->
         <div class="body-wrapper">
-            <!-- Begin Header Area -->
+             <div class="breadcrumb-area">
+                <div class="container">
+                    <div class="breadcrumb-content">
+                        <ul>
+                            <li><a href="{{ route('index') }}">Home</a></li>
+                            <li class="active">{{ $title }}</li> <!-- Sử dụng biến $title -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+                    <!-- Begin Header Area -->
 
             <!-- Header Area End Here -->
-
-
             @yield('content')
 
 

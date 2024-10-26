@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Page;
 use App\Http\Service\Menu\MenuService;
 use App\Http\Service\Product\ProductService;
+use App\Models\Wishlist;
+
 class ContactController{
     protected $menuService;
     protected $productService;
@@ -13,10 +15,11 @@ class ContactController{
 
     }
     public function index(){
-
+        $count = Wishlist::count();
         return view('pages.contact',[
-            'title' => 'Trang Chủ',
-            'menus' => $this->menuService->getParent()
+            'title' => 'Contact',
+            'menus' => $this->menuService->getParent(),
+            'count' => $count
         ]);
     }
 }

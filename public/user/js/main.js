@@ -37,21 +37,8 @@ Note: main.js, All Default Scripting Languages For This Theme Included In This F
 		26. WOW
 
 -----------------------------------------------------------------------------------*/
-    function scrollRight() {
-        // Thay đổi trang
-        const nextPageLink = document.querySelector('.pagination .next a');
-        if (nextPageLink) {
-            window.location.href = nextPageLink.href; // Điều hướng đến trang tiếp theo
-        }
-    }
+;
 
-    function scrollLeft() {
-        // Thay đổi trang
-        const previousPageLink = document.querySelector('.pagination .prev a');
-        if (previousPageLink) {
-            window.location.href = previousPageLink.href; // Điều hướng đến trang trước đó
-        }
-    }
 
 
 (function ($) {

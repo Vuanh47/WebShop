@@ -1,18 +1,6 @@
 @extends('main')
 
 @section('content')
-       <!-- Begin Li's Breadcrumb Area -->
-       <div class="breadcrumb-area">
-                <div class="container">
-                    <div class="breadcrumb-content">
-                        <ul>
-                            <li><a href="index.php">Home</a></li>
-                            <li class="active">About Us</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <!-- Li's Breadcrumb Area End Here -->
             <!-- about wrapper start -->
             <div class="about-us-wrapper pt-60 pb-40">
                 <div class="container">
@@ -122,12 +110,12 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="li-section-title capitalize mb-25">
-                                <h2><span>our team</span></h2>
+                                <h2><span>Developer</span></h2>
                             </div>
                         </div>
                     </div> <!-- section title end -->
-                    <div class="row">
-                        <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-lg-4 col-md-6 col-sm-6 d-flex justify-content-center">
                             <div class="team-member mb-60 mb-sm-30 mb-xs-30">
                                 <div class="team-thumb">
                                     <img src="{{asset('user/images/team/KiYeu.jpg')}}" alt="Our Team Member">
@@ -144,46 +132,10 @@
                                     </div>
                                 </div>
                             </div>
-                        </div> <!-- end single team member -->
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="team-member mb-60 mb-sm-30 mb-xs-30">
-                                <div class="team-thumb">
-                                    <img src="{{asset('user/images/team/image.png')}}" alt="Our Team Member">
-                                </div>
-                                <div class="team-content text-center">
-                                    <h3>Trần Ngọc Thanh Tùng</h3>
-                                    <p>Web Designer</p>
-                                    <a href="#">mydog@gmail.com</a>
-                                    <div class="team-social">
-                                        <a href="#"><i class="fa fa-facebook"></i></a>
-                                        <a href="#"><i class="fa fa-twitter"></i></a>
-                                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                                        <a href="#"><i class="fa fa-google-plus"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> <!-- end single team member -->
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="team-member mb-30 mb-sm-60">
-                                <div class="team-thumb">
-                                    <img src="{{asset('user/images/team/chungdb.jpg')}}" alt="Our Team Member">
-                                </div>
-                                <div class="team-content text-center">
-                                    <h3>Ngô Quang Chung</h3>
-                                    <p>Web Developer</p>
-                                    <a href="#">chungbede@gmail.com</a>
-                                    <div class="team-social">
-                                        <a href="#"><i class="fa fa-facebook"></i></a>
-                                        <a href="#"><i class="fa fa-twitter"></i></a>
-                                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                                        <a href="#"><i class="fa fa-google-plus"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> <!-- end single team member -->
-                       
+                        </div>
                     </div>
-                </div>
+
+                  </div>
             </div>
             <!-- team area wrapper end -->
 @endsection

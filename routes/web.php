@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\UploadController;
 use App\Http\Controllers\Page\AboutController;
 use App\Http\Controllers\Page\BlogController;
 use App\Http\Controllers\Page\CartController;
+use App\Http\Controllers\Page\CheckOutController;
 use App\Http\Controllers\Page\ContactController;
 use App\Http\Controllers\Page\HomeCotroller;
 use App\Http\Controllers\Page\ShopController;
@@ -32,12 +33,21 @@ Route::prefix('/')->group(function () {
     Route::get('/shop', [ShopController::class, 'index'])->name('shop');
     Route::get('/blog', [BlogController::class, 'details'])->name('blog.details');
     Route::get('/cart', [CartController::class, 'index'])->name('cart');
+    Route::get('/cart/{id}', [CartController::class, 'add'])->name('cart.add');
+
     Route::get('/about', [AboutController::class, 'index'])->name('about');
     Route::get('/contact', [ContactController::class, 'index'])->name('contact');
     Route::get('/search', [ShopController::class, 'search'])->name('search');
-    Route::get('/product-details', [DetailsController::class, 'details'])->name('details');
-    Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist');
+    Route::get('/product-details/{id}', [DetailsController::class, 'details'])->name('details');
+    Route::get('/checkout', [CheckOutController::class, 'index'])->name('checkout');
 
+    #wishlist
+    Route::prefix('wishlist')->group(function () {
+        Route::get('/', [WishlistController::class, 'index'])->name('wishlist');
+        Route::post('/store/{id}', [WishlistController::class, 'store'])->name('wishlist.store');
+        Route::get('/remove', [WishlistController::class, 'remove'])->name('wishlist.remove');
+    });
+    
 
 
 });

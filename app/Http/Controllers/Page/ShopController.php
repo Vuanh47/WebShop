@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Page;
 use App\Http\Service\Menu\MenuService;
 use App\Http\Service\Product\ProductService;
 use App\Models\Product;
+use App\Models\Wishlist;
 use Illuminate\Http\Request;
 
 class ShopController{
@@ -17,14 +18,15 @@ class ShopController{
     }
     public function index()
     {
-        // Lấy tất cả sản phẩm
+        $count = Wishlist::count();
         $products = $this->productService->getAll();
         
         // Trả về view với danh sách sản phẩm
         return view('pages.shop', [
             'title' => 'Shop',
             'menus' => $this->menuService->getParent(),
-            'products' => $products
+            'products' => $products,
+            'count' => $count
         ]);
     }
     

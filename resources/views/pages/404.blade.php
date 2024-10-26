@@ -2,16 +2,6 @@
 
 @section('content')
     <!-- Begin Li's Breadcrumb Area -->
-    <div class="breadcrumb-area">
-                <div class="container">
-                    <div class="breadcrumb-content">
-                        <ul>
-                            <li><a href="index.php">Home</a></li>
-                            <li class="active">404 Error</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
             <!-- Li's Breadcrumb Area End Here -->
             <!-- Error 404 Area Start -->
             <div class="error404-area pt-30 pb-60">

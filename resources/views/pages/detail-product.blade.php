@@ -1,18 +1,6 @@
 @extends('main')
 
 @section('content')
-      <!-- Begin Li's Breadcrumb Area -->
-             <div class="breadcrumb-area">
-                <div class="container">
-                    <div class="breadcrumb-content">
-                        <ul>
-                            <li><a href="index.php">Home</a></li>
-                            <li class="active">Single Product</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <!-- Li's Breadcrumb Area End Here -->
             <!-- content-wraper start -->
             <div class="content-wraper">
                 <div class="container">
@@ -22,8 +10,8 @@
                             <div class="product-details-left">
                                 <div class="product-details-images slider-navigation-1">
                                     <div class="lg-image">
-                                        <a class="popup-img venobox vbox-item" href="{{asset('user/images/product/large-size/1.jpg')}}" data-gall="myGallery">
-                                            <img src="{{asset('user/images/product/large-size/1.jpg')}}" alt="product image">
+                                        <a class="popup-img venobox vbox-item" href="{{ asset('storage/uploads/' . $product->thumb) }}" data-gall="myGallery">
+                                        <img src="{{ asset('storage/uploads/' . $product->thumb) }}" alt="Li's Product Image">
                                         </a>
                                     </div>
                                     <div class="lg-image">
@@ -53,7 +41,7 @@
                                     </div>
                                 </div>
                                 <div class="product-details-thumbs slider-thumbs-1">                                        
-                                    <div class="sm-image"><img src="{{asset('user/images/product/small-size/1.jpg')}}" alt="product image thumb"></div>
+                                    <div class="sm-image"><img src="{{ asset('storage/uploads/' . $product->thumb) }}" alt="product image thumb"></div>
                                     <div class="sm-image"><img src="{{asset('user/images/product/small-size/2.jpg')}}" alt="product image thumb"></div>
                                     <div class="sm-image"><img src="{{asset('user/images/product/small-size/3.jpg')}}" alt="product image thumb"></div>
                                     <div class="sm-image"><img src="{{asset('user/images/product/small-size/4.jpg')}}" alt="product image thumb"></div>
@@ -67,7 +55,7 @@
                         <div class="col-lg-7 col-md-6">
                             <div class="product-details-view-content pt-60">
                                 <div class="product-info">
-                                    <h2>Today is a good day Framed poster</h2>
+                                    <h1 style="color: blue;">{{$product->name}}</h1>
                                     <span class="product-details-ref">Reference: demo_15</span>
                                     <div class="rating-box pt-20">
                                         <ul class="rating rating-with-review-item">
@@ -80,25 +68,24 @@
                                             <li class="review-item"><a href="#">Write Review</a></li>
                                         </ul>
                                     </div>
-                                    <div class="price-box pt-20">
-                                        <span class="new-price new-price-2">$57.98</span>
+                                    <div class="price-box">
+                                        <span class="new-price">{{ $product->price_sale }} VND</span>
+                                        <span class="old-price">{{ $product->price }} VND</span>
+                                        <?php
+                                            $price = floatval($product->price);
+                                            $price_sale = floatval($product->price_sale);
+
+                                            $discount_percentage = (($price - $price_sale) / $price) * 100;
+                                        ?>
+                                        <span class="discount-percentage">-{{ number_format($discount_percentage, 0) }}%</span>
                                     </div>
+
                                     <div class="product-desc">
                                         <p>
-                                            <span>100% cotton double printed dress. Black and white striped top and orange high waisted skater skirt bottom. Lorem ipsum dolor sit amet, consectetur adipisicing elit. quibusdam corporis, earum facilis et nostrum dolorum accusamus similique eveniet quia pariatur.
-                                            </span>
+                                            <span>{!! $product->content !!}</span>
                                         </p>
                                     </div>
-                                    <div class="product-variants">
-                                        <div class="produt-variants-size">
-                                            <label>Dimension</label>
-                                            <select class="nice-select">
-                                                <option value="1" title="S" selected="selected">40x60cm</option>
-                                                <option value="2" title="M">60x90cm</option>
-                                                <option value="3" title="L">80x120cm</option>
-                                            </select>
-                                        </div>
-                                    </div>
+                                    
                                     <div class="single-add-to-cart">
                                         <form action="#" class="cart-quantity">
                                             <div class="quantity">
@@ -176,7 +163,7 @@
                     <div class="tab-content">
                         <div id="description" class="tab-pane active show" role="tabpanel">
                             <div class="product-description">
-                                <span>The best is yet to come! Give your walls a voice with a framed poster. This aesthethic, optimistic poster will look great in your desk or in an open-space office. Painted wooden frame with passe-partout for more depth.</span>
+                                <span>{!! $product->content !!}</span>
                             </div>
                         </div>
                         <div id="product-details" class="tab-pane" role="tabpanel">
@@ -297,7 +284,7 @@
                         <div class="col-lg-12">
                             <div class="li-section-title">
                                 <h2>
-                                    <span>15 other products in the same category:</span>
+                                    <span>{{$countRelatedPro}} other products in the same category:</span>
                                 </h2>
                             </div>
                             <div class="row">

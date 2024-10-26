@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Page;
 use App\Http\Service\Menu\MenuService;
 use App\Http\Service\Product\ProductService;
+use App\Models\Wishlist;
+
 class HomeCotroller{
     protected $menuService;
     protected $productService;
@@ -14,10 +16,12 @@ class HomeCotroller{
     }
     public function index()
     {
-        $menus = $this->menuService->getParent1()->paginate(10); // Lấy 10 mục mỗi trang
+        $count = Wishlist::count();
+        $menus = $this->menuService->getParent(); // Lấy 10 mục mỗi trang
         return view('pages.index', [
             'title' => 'Trang Chủ',
-            'menus' => $menus
+            'menus' => $menus,
+            'count' => $count
         ]);
     }
     

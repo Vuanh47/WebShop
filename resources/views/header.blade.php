@@ -128,8 +128,8 @@
                                     <ul class="hm-menu">
                                         <!-- Begin Header Middle Wishlist Area -->
                                         <li class="hm-wishlist">
-                                            <a href="/wishlist.php">
-                                                <span class="cart-item-count wishlist-item-count">0</span>
+                                            <a href="{{route('wishlist')}}">
+                                                <span class="cart-item-count wishlist-item-count">{{$count}}</span>
                                                 <i class="fa fa-heart-o"></i>
                                             </a>
                                         </li>
@@ -172,10 +172,10 @@
                                                 </ul>
                                                 <p class="minicart-total">SUBTOTAL: <span>£80.00</span></p>
                                                 <div class="minicart-button">
-                                                    <a href="checkout.php" class="li-button li-button-dark li-button-fullwidth li-button-sm">
+                                                    <a href="{{route('cart')}}" class="li-button li-button-dark li-button-fullwidth li-button-sm">
                                                         <span>View Full Cart</span>
                                                     </a>
-                                                    <a href="checkout.php" class="li-button li-button-fullwidth li-button-sm">
+                                                    <a href="{{route('checkout')}}" class="li-button li-button-fullwidth li-button-sm">
                                                         <span>Checkout</span>
                                                     </a>
                                                 </div>

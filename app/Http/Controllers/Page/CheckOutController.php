@@ -5,7 +5,7 @@ use App\Http\Service\Menu\MenuService;
 use App\Http\Service\Product\ProductService;
 use App\Models\Wishlist;
 
-class CartController{
+class CheckOutController{
     protected $menuService;
     protected $productService;
 
@@ -16,8 +16,8 @@ class CartController{
     }
     public function index(){
         $count = Wishlist::count();
-        return view('pages.shopping-cart',[
-            'title' => 'Shopping Cart',
+        return view('pages.checkout',[
+            'title' => 'Check Out',
             'menus' => $this->menuService->getParent(),
             'count' => $count
         ]);

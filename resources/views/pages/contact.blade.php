@@ -1,18 +1,7 @@
 @extends('main')
 
 @section('content')
-      <!-- Begin Li's Breadcrumb Area -->
-      <div class="breadcrumb-area">
-                <div class="container">
-                    <div class="breadcrumb-content">
-                        <ul>
-                            <li><a href="index.php">Home</a></li>
-                            <li class="active">Contact</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <!-- Li's Breadcrumb Area End Here -->     
+   
             <!-- Begin Contact Main Page Area -->
             <div class="contact-main-page mt-60 mb-40 mb-md-40 mb-sm-40 mb-xs-40">
                 <div class="container mb-60">

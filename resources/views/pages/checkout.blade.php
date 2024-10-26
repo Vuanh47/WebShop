@@ -1,18 +1,6 @@
 @extends('main')
 
 @section('content')
-     <!-- Begin Li's Breadcrumb Area -->
-     <div class="breadcrumb-area">
-                <div class="container">
-                    <div class="breadcrumb-content">
-                        <ul>
-                            <li><a href="index.php">Home</a></li>
-                            <li class="active">Checkout</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <!-- Li's Breadcrumb Area End Here -->
             <!--Checkout Area Strat-->
             <div class="checkout-area pt-60 pb-30">
                 <div class="container">

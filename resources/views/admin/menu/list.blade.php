@@ -8,6 +8,7 @@
                 <th>Name</th>
                 <th>Active</th>
                 <th>Update</th>
+                <th>Hình Ảnh</th>
                 <th>Actions</th> <!-- Tiêu đề cho cột hành động -->
             </tr>
         </thead>
@@ -30,6 +31,8 @@
                                 <td>' . $char . $menu->name . '</td>
                                 <td>' . $activeButton . '</td>
                                 <td>' . $menu->updated_at . '</td>
+                                <td><a href="/storage/uploads/' . $menu->thumb . '"><img src="/storage/uploads/' . $menu->thumb . '" width="100px"></a></td>
+
                                 <td>
                                     <a href="' . route('menu.edit', $menu->id) . '" class="btn btn-warning btn-sm" title="Sửa">
                                         <i class="fas fa-edit"></i>

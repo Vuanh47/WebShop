@@ -30,9 +30,9 @@
                 <td>{{ $product->price_sale }}</td>
                 <td>
                     @if($product->active == 1)
-                        <button class="btn btn-success btn-sm">Yes</button>
+                        <button class="btn btn-success btn-sm mt-1">Yes</button>
                     @else
-                        <button class="btn btn-danger btn-sm">No</button>
+                        <button class="btn btn-danger btn-sm mt-1">No</button>
                     @endif
                 </td>
 
@@ -44,10 +44,10 @@
                     <a href="{{route('product.edit', $product->id) }}" class="btn btn-warning btn-sm" title="Sửa">
                         <i class="fas fa-edit"></i>
                     </a>
-                    <form action="{{route('product.destroy', $product->id)}} " method="POST" style="display:inline-block;" onsubmit="return confirm('Bạn có chắc chắn muốn xóa?')">
+                    <form action="{{route('product.destroy', $product->id)}} " method="POST" style="display:inline-block mt-2;" onsubmit="return confirm('Bạn có chắc chắn muốn xóa?')">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm">
+                        <button type="submit" class="btn btn-danger btn-sm mt-2">
                             <i class="fas fa-trash-alt"></i>
                         </button>
                     </form>

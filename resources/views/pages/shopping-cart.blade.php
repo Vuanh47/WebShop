@@ -1,18 +1,6 @@
 @extends('main')
 
 @section('content')
-    <!-- Begin Li's Breadcrumb Area -->
-    <div class="breadcrumb-area">
-                <div class="container">
-                    <div class="breadcrumb-content">
-                        <ul>
-                            <li><a href="index.php">Home</a></li>
-                            <li class="active">Shopping Cart</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <!-- Li's Breadcrumb Area End Here -->
             <!--Shopping Cart Area Strat-->
             <div class="Shopping-cart-area pt-60 pb-60">
                 <div class="container">

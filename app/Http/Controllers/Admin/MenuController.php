@@ -21,6 +21,7 @@ class MenuController extends Controller
         return view('admin.menu.add',[
             'title' => 'Thêm Danh Mục',
             'menus' => $this->menuService->getParent(),
+            'imageUrl' => ''
         ]);
     }
 
@@ -41,10 +42,12 @@ class MenuController extends Controller
     {
         $menu = Menu::findOrFail($id);
         $menus = Menu::all(); // Danh sách tất cả các danh mục
+        $imageUrl ='/storage/uploads/' .$menu->thumb;
         return view('admin.menu.edit', [
             'menu' => $menu, // Truyền danh mục hiện tại
             'menus' => $menus, // Truyền danh sách các danh mục
-            'title' => 'Chỉnh sửa Danh Mục'
+            'title' => 'Chỉnh sửa Danh Mục',
+            'imageUrl' => $imageUrl
         ]);
         
 

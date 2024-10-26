@@ -36,7 +36,7 @@ class MenuService{
                 'name' =>(string) $request->input('name'),
                 'parent_id' =>(string) $request->input('parent_id'),
                 'description' =>(string) $request->input('description'),
-                'content' =>(string) $request->input('content'),
+                'thumb' =>(string) $request->input('thumb'),
                 'active' =>(string) $request->input('active'),
                 
             ]);

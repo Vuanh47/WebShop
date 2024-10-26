@@ -1,18 +1,6 @@
 @extends('main')
 
 @section('content')
-    <!-- Begin Li's Breadcrumb Area -->
-    <div class="breadcrumb-area">
-        <div class="container">
-            <div class="breadcrumb-content">
-                <ul>
-                    <li><a href="{{ url('/') }}">Home</a></li>
-                    <li class="active">Shop</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <!-- Li's Breadcrumb Area End Here -->
 
     <!-- Begin Li's Content Wraper Area -->
     <div class="content-wraper pt-60 pb-60">
@@ -47,19 +35,39 @@
                                         </div>
                                         <h4><a class="product_name" href="{{ route('details', $product->id) }}">{{ $product->name }}</a></h4>
                                         <div class="price-box">
-                                            <span class="new-price">{{ $product->price_sale }} VND</span>
+                                            <span class="new-price"  style="color: red; font-size: 18px;">{{ $product->price_sale }}</span>
                                            
-                                                <span class="old-price">{{ $product->price }} VND</span>
-                                                <span class="discount-percentage">-{{ number_format((($product->price - $product->price_sale) / $product->price) * 100, 0) }}%</span>
+                                                <span class="old-price">{{ $product->price }}</span>
+                                                <?php
+                                                    $price = floatval($product->price);
+                                                    $price_sale = floatval($product->price_sale);
+
+                                                    $discount_percentage = (($price - $price_sale) / $price) * 100;
+                                                ?>
+                                                <span class="discount-percentage">-{{ number_format($discount_percentage, 0) }}%</span>
                                          
                                         </div>
                                     </div>
                                     <div class="add-actions">
                                         <ul class="add-actions-link">
-                                            <li class="add-cart active"><a href="{{ route('cart', $product->id) }}">Add to cart</a></li>
-                                            <li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li>
-                                            <li><a class="links-details" href="{{ route('wishlist', $product->id) }}"><i class="fa fa-heart-o"></i></a></li>
+                                            <li class="add-cart active">
+                                                <a href="{{ route('cart', $product->id) }}">Add to cart</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter">
+                                                    <i class="fa fa-eye"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <form action="{{ route('wishlist.store', $product->id) }}" method="POST" style="display: inline;">
+                                                    @csrf
+                                                    <button type="submit" style="background: none; border: none; padding: 0; cursor: pointer;">
+                                                        <i class="fa fa-heart-o"></i>
+                                                    </button>
+                                                </form>
+                                            </li>
                                         </ul>
+
                                     </div>
                                 </div>
                             </div>
