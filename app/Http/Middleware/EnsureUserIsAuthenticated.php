@@ -21,7 +21,7 @@ class EnsureUserIsAuthenticated
         // Kiểm tra xem người dùng đã đăng nhập chưa
         if (!Auth::check()) {
             
-            return redirect()->route('login');
+            return redirect()->route('admin.login');
         }
 
         return $next($request);

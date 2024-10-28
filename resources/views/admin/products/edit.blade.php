@@ -35,13 +35,19 @@
                 <div class="row">
                        <div class="col-md-6 form-group mb-3"> 
                             <label for="price" class="form-label">Giá Gốc</label> 
-                            <input type="number" name="price" value="{{$product->price}}" class="form-control" id="price" placeholder="">
+                            <input type="text" name="price" value="{{$product->price}}" class="form-control" id="price" placeholder="">
                         </div>
                     
                        <div class="col-md-6 form-group mb-3"> 
                             <label for="price_sale" class="form-label">Giá Khuyến Mãi</label> 
-                            <input type="number" name="price_sale" value="{{$product->price_sale}}" class="form-control" id="price_sale">
+                            <input type="text" name="price_sale" value="{{$product->price_sale}}" class="form-control" id="price_sale">
                         </div>
+                </div>
+
+                
+                <div class="form-group mb-3"> 
+                    <label for="quality" class="form-label">Số Lượng Sản Phẩm</label> 
+                    <input type="number" class="form-control" name="quality" id="quality" value="{{ $product->quality }}" placeholder="Nhập Số Lượng Sản Phẩm">
                 </div>
 
                 <div class="form-group mb-3"> 

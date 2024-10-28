@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Page;
 use App\Http\Service\Menu\MenuService;
 use App\Http\Service\Product\ProductService;
+use App\Models\Customer;
 use App\Models\Wishlist;
 
 class HomeCotroller{
@@ -21,7 +22,7 @@ class HomeCotroller{
         return view('pages.index', [
             'title' => 'Trang Chủ',
             'menus' => $menus,
-            'count' => $count
+            'count' => $count,
         ]);
     }
     

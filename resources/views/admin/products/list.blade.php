@@ -8,7 +8,7 @@
                 <th>Tên Sản Phẩm</th>
                 <th>Danh Mục</th>            
                 <th>Mô Tả</th>
-                <th>Mô Tả Chi Tiết</th>
+                <th>Số Lượng</th>
                 <th>Giá Gốc</th>
                 <th>Giá Khuyến Mãi</th>
                 <th>Active</th>
@@ -25,7 +25,7 @@
                 <td>{{ $product->name }}</td>
                 <td>{{ $product->category }}</td>
                 <td>{{ $product->description }}</td>
-                <td>{!! $product->content !!}</td>
+                <td>{{ $product->quality }}</td>
                 <td>{{ $product->price }}</td>
                 <td>{{ $product->price_sale }}</td>
                 <td>

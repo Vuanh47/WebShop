@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Users;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -12,13 +13,13 @@ class RegisterController extends Controller{
     public function register(Request $request) {
         // Validate the request data
         $request->validate([
-            'email' => 'required|email:filter|unique:users,email', // Ensure email is unique
+            'email' => 'required|email:filter|unique:admin,email', // Ensure email is unique
             'password' => 'required|string|min:6', 
             'name' => 'required|string|max:255',
         ]);
 
         // Create the new user in the database
-        $user = User::create([
+        $user = Admin::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password), // Hash the password
@@ -27,7 +28,6 @@ class RegisterController extends Controller{
         // Automatically log the user in after registration
         Auth::login($user);
 
-        // Redirect to the dashboard or home page with a success message
         return redirect()->route('admin')->with('success', 'Registration successful! You are now logged in.');
     }
 }

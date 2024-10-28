@@ -26,7 +26,9 @@ class ShopController{
             'title' => 'Shop',
             'menus' => $this->menuService->getParent(),
             'products' => $products,
-            'count' => $count
+            'count' => $count,
+            'user' =>'vuanh'
+
         ]);
     }
     

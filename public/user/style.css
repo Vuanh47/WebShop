@@ -5493,6 +5493,69 @@ span.required {
     border-radius: 4px;
     font-size: 0.9em;
 }
+/* CSS */
+.remove-btn {
+    background: none;
+    border: none;
+    color: red;
+    font-size: 16px;
+    cursor: pointer;
+    transition: color 0.3s ease; /* Hiệu ứng mượt */
+}
+
+.remove-btn:hover {
+    color: darkred; /* Đổi màu khi hover */
+    transform: scale(1.1); /* Tăng kích thước một chút khi hover */
+}
+/* CSS for Login Component */
+.login {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.login a {
+    display: inline-block;
+    padding: 10px 20px;
+    font-weight: 400;
+    font-size: 14px;
+    color: #ffffff;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+/* Hover hiệu ứng */
+.login a:hover {
+    color: yellow;
+    transform: scale(1.1); /* Phóng to chữ khi hover */
+}
+
+
+.login a.user-name:hover {
+    transform: scale(1.1); /* Phóng to chữ khi hover */
+}
+
+/* Kiểu dáng cho nút Logout */
+.logout-button {
+    background-color: transparent; /* Nền trong suốt */
+    border: none; /* Không viền */
+    color: #ffffff; /* Màu chữ giống với các liên kết khác */
+    font-size: 14px; /* Kích thước chữ giống với các liên kết khác */
+    padding: 10px 20px; /* Padding giống với liên kết */
+    cursor: pointer; /* Con trỏ chuột dạng bàn tay */
+    transition: color 0.3s ease, transform 0.3s ease; /* Hiệu ứng chuyển đổi */
+}
+
+/* Hiệu ứng hover cho nút Logout */
+.logout-button:hover {
+    color: yellow; /* Màu chữ khi hover */
+    transform: scale(1.1); /* Phóng to chữ khi hover */
+}
+
+
+
 
 /*----------------------------------------------------------------------------------------------------*/
 /*------------------------------------------> The End <-----------------------------------------------*/

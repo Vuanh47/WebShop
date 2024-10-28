@@ -40,6 +40,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'cus' => [
+            'driver' => 'session',
+            'provider' => 'customer',
+        ],
     ],
 
     /*
@@ -59,12 +63,19 @@ return [
     |
     */
 
-    'providers' => [
-                        'users' => [
-                            'driver' => 'eloquent',
-                            'model' => App\Models\User::class,
-                        ],
-                    ],
+        'providers' => [
+            'users' => [
+                'driver' => 'eloquent',
+                'model' => App\Models\Admin::class,
+                'table' => 'admin', // cấu hình đúng bảng admin
+            ],
+            'customer' => [
+                'driver' => 'eloquent',
+                'model' => App\Models\Customer::class,
+                'table' => 'customer', // cấu hình đúng bảng admin
+            ],
+        ],
+
 
 
         // 'users' => [
@@ -95,6 +106,12 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table' => env('AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'),
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'customer' => [
+            'provider' => 'customer',
             'table' => env('AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'),
             'expire' => 60,
             'throttle' => 60,

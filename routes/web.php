@@ -20,15 +20,20 @@ use App\Http\Controllers\MainCotroller;
 use App\Http\Controllers\Page\DetailsController;
 use App\Http\Controllers\Page\WishlistController;
 use App\Http\Middleware\EnsureUserIsAuthenticated;
+use App\Http\Controllers\Customer\CustomerController;
 
-
-Route::get('admin/user/login', [LoginController::class, 'index'])->name('login');
-
-Route::post('admin/user/login/store',[LoginController::class, 'store']);
-Route::post('admin/user/register/store',[RegisterController::class, 'register'])->name('register');
-
+Route::prefix('admin/user')->group(function(){
+    Route::get('login', [LoginController::class, 'index'])->name('admin.login');
+    Route::post('login/store',[LoginController::class, 'store'])->name('admin.store');
+    Route::post('register/store', [RegisterController::class, 'register'])->name('admin.register');
+});
 #pages
 Route::prefix('/')->group(function () {
+    Route::post('register', [CustomerController::class, 'register'])->name('register');
+    Route::post('login/store',[CustomerController::class, 'store'])->name('store');
+    Route::get('login', [CustomerController::class, 'login'])->name('login');
+    Route::post('/logout', [CustomerController::class, 'logout'])->name('logout');
+
     Route::get('/', [HomeCotroller::class, 'index'])->name('index');
     Route::get('/shop', [ShopController::class, 'index'])->name('shop');
     Route::get('/blog', [BlogController::class, 'details'])->name('blog.details');
@@ -42,15 +47,15 @@ Route::prefix('/')->group(function () {
     Route::get('/checkout', [CheckOutController::class, 'index'])->name('checkout');
 
     #wishlist
-    Route::prefix('wishlist')->group(function () {
-        Route::get('/', [WishlistController::class, 'index'])->name('wishlist');
-        Route::post('/store/{id}', [WishlistController::class, 'store'])->name('wishlist.store');
-        Route::get('/remove', [WishlistController::class, 'remove'])->name('wishlist.remove');
+   // web.php
+   Route::middleware('cus')->group(function () {
+        Route::prefix('wishlist')->group(function () {
+            Route::get('/', [WishlistController::class, 'index'])->name('wishlist');
+            Route::post('/store/{id}', [WishlistController::class, 'store'])->name('wishlist.store');
+            Route::delete('/remove/{id}', [WishlistController::class, 'remove'])->name('wishlist.remove');
+        });
+      });
     });
-    
-
-
-});
 
 
 

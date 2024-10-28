@@ -18,6 +18,7 @@ class Product extends Model
         'price',
         'price_sale',
         'thumb',
+        'quality',
     ];
     
 }

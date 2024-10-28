@@ -2,14 +2,12 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class Customer extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
     /**
@@ -17,10 +15,13 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    protected $table ='customers';
     protected $fillable = [
         'name',
         'email',
         'password',
+        'phone',
+        'address'
     ];
 
     /**
@@ -33,6 +34,12 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    /**
+     * Get the table associated with the model.
+     *
+     * @return string
+     */
+   
     /**
      * Get the attributes that should be cast.
      *

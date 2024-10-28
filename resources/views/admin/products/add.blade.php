@@ -14,11 +14,13 @@
         <form action="{{route('product.store')}}" method="POST" enctype="multipart/form-data"> 
             <!--begin::Body-->
             <div class="card-body">
+
+                
                 <div class="row">
-                       <div class="col-md-6 form-group mb-3"> 
-                            <label for="name" class="form-label">Tên Sản Phẩm</label> 
-                            <input type="text" name="name" class="form-control" id="name" placeholder="Nhập Tên Sản Phẩm">
-                        </div>
+                    <div class="col-md-12 form-group mb-3"> 
+                         <label for="name" class="form-label">Tên Sản Phẩm</label> 
+                         <input type="text" name="name" class="form-control" id="name" placeholder="Nhập Tên Sản Phẩm">
+                     </div>
                     
                         <div class="col-md-6 form-group mb-3"> 
                             <label for="category" class="form-label">Danh Mục</label> 
@@ -28,6 +30,12 @@
                                 @endforeach
                             </select>  
                         </div>
+
+                        <div class="col-md-6 form-group mb-3"> 
+                            <label for="quality" class="form-label">Số Lượng Sản Phẩm</label> 
+                            <input type="number" class="form-control" name="quality" id="quality" placeholder="Nhập Số Lượng Sản Phẩm"></input>
+                        </div>
+
                 </div>
 
                 <div class="row">
@@ -41,6 +49,8 @@
                             <input type="text" name="price_sale" class="form-control" id="price_sale" placeholder="Nhập giá Khuyến Mãi">
                         </div>
                 </div>
+
+              
 
                 <div class="form-group mb-3"> 
                     <label for="description" class="form-label">Mô Tả</label> 

@@ -11,7 +11,7 @@
 
     <div class="container" id="container">
         <div class="form-container sign-up">
-            <form method="post" action="{{route('register')}}">
+            <form method="post" action="{{route('admin.register')}}">
                 <h1>Create Account</h1>
                 <div class="social-icons">
                     <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>

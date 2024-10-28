@@ -34,7 +34,15 @@ class WishlistController{
             'count' => $count
         ]);
     }
-    public function remove(){
-
+    public function remove($id){
+        // Sử dụng findOrFail để ném lỗi nếu không tìm thấy sản phẩm
+        $wishlistItem = Wishlist::findOrFail($id);
+    
+        // Xóa sản phẩm
+        $wishlistItem->delete();
+    
+        // Chuyển hướng lại với thông báo thành công
+        return redirect()->back()->with('success', 'Product deleted successfully!');
     }
+    
 }

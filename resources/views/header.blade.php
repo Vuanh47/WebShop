@@ -5,6 +5,13 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Favicon -->
+  
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+        <!-- SweetAlert CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+        <!-- SweetAlert JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+
         <link rel="shortcut icon" type="image/x-icon" href="{{asset('user/images/favicon.png')}}">
         <!-- Material Design Iconic Font-V2.2.0 -->
         <link rel="stylesheet" href="{{asset('user/css/material-design-iconic-font.min.css')}}">
@@ -40,8 +47,8 @@
          
         <script src="{{asset('user/js/vendor/modernizr-2.8.3.min.js')}}"></script>
         @yield('head')
-    </head>
-    <header class="li-header-4">
+</head>
+<header class="li-header-4">
                 <!-- Begin Header Top Area -->
                 <div class="header-top">
                     <div class="container">
@@ -59,21 +66,8 @@
                             <div class="col-lg-9 col-md-8">
                                 <div class="header-top-right">
                                     <ul class="ht-menu">
-                                        <!-- Begin Setting Area -->
-                                        <li>
-                                            <div class="ht-setting-trigger "><span><a href="/login-register.php" class="text-white">My Account <i class="fa-solid fa-user-shield"></i></a></span></div>
-                                            <div class="setting ht-setting">
-                                                <ul class="ht-setting-list">
-                                                 
-                                                    <li><a href="checkout.php">Checkout</a></li>
-                                                    <li><a href="login-register.php">Sign In</a></li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                        <!-- Setting Area End Here -->
                                         <!-- Begin Language Area -->
-                                        <li>
-                                            
+                                        <li>                                           
                                             <div class="ht-language-trigger"><span>Language</span></div>
                                             <div class="language ht-language">
                                                 <ul class="ht-setting-list">
@@ -88,6 +82,23 @@
                                             </div>
                                         </li>
                                         <!-- Language Area End Here -->
+                                        <div class="login">
+                                            @if(session()->has('customerName'))
+                                                <a href="#" class="user-name" style="display: flex; align-items: center;">
+                                                    <i class="fa-solid fa-user"></i>
+                                                    <span style="margin-left: 5px;">{{ session('customerName') }}</span>
+                                                </a>
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="margin-left: 10px;">
+                                                    @csrf
+                                                    <button type="submit" class="logout-button">Logout</button>
+                                                </form>
+                                            @else
+                                                <a href="{{ route('login') }}" class="login-button">Login</a>
+                                            @endif
+                                        </div>
+
+
+
                                     </ul>
                                 </div>
                             </div>

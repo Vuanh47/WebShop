@@ -12,19 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('products', function (Blueprint $table) {
-          
-            $table->integer('quality')->default(0); // Thêm cột quality, mặc định là 0
+            $table->integer('quality')->default(0);
         });
     }
-
-    /**
-     * Reverse the migrations.
-     */
+    
     public function down(): void
     {
         Schema::table('products', function (Blueprint $table) {
-        
-            $table->dropColumn('quality'); // Xóa cột quality khi rollback
+            $table->dropColumn('quality');
         });
     }
+    
 };
