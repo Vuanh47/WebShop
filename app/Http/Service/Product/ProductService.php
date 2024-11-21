@@ -32,6 +32,8 @@ use Illuminate\Support\Facades\Session;
               'price_sale' =>(string) $request->input('price_sale'),
               'thumb' =>(string) $request->input('thumb'),
               'quality' =>(integer) $request->input('quality'),
+              'menu_id' =>(integer) $request->input('menu_id'),
+
           ]);
 
           Session::flash('success', 'Tạo Sản Phẩm Thành Công');

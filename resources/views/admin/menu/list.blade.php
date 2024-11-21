@@ -1,6 +1,7 @@
 @extends('admin.main')
 
 @section('content')
+<div class="card card-primary card-outline mb-4"></div>
     <table class="table">
         <thead>
             <tr>
@@ -61,4 +62,5 @@
             {!! renderMenu($menus) !!}
         </tbody>
     </table>
+</div>
 @endsection

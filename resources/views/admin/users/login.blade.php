@@ -29,6 +29,7 @@
         </div>
         <div class="form-container sign-in">
             <form action="/admin/user/login/store" method="post">
+            @csrf
                 <h1>Sign In</h1>
                 <div class="social-icons">
                     <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
@@ -44,7 +45,7 @@
 
                 <a href="#">Forget Your Password?</a>
                 <button type="submit">Sign In</button>
-                @csrf
+                
             </form>
         </div>
         <div class="toggle-container">

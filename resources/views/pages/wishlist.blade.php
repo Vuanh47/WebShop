@@ -1,14 +1,14 @@
 @extends('main')
 
 @section('content')
-    <!--Wishlist Area Start-->
+    <!-- Wishlist Area Start -->
     <div class="wishlist-area pt-60 pb-60">
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <div class="table-content table-responsive">
-                        <table class="table">
-                            <thead>
+                        <table class="table cart-table table-bordered table-striped">
+                            <thead class="thead-dark">
                                 <tr>
                                     <th class="li-product-remove">Remove</th>
                                     <th class="li-product-thumbnail">Images</th>
@@ -19,7 +19,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($wishlist as $item)
+                                @forelse($wishlist as $item)
                                     <tr>
                                         <td class="li-product-remove" style="text-align: center; vertical-align: middle;">
                                             <form action="{{ route('wishlist.remove', ['id' => $item->id]) }}" method="POST" onsubmit="return confirm('Bạn có chắc chắn muốn xóa?')">
@@ -35,26 +35,44 @@
                                             <a href="#"><img src="{{ asset('storage/uploads/' . $item->thumb) }}" alt="{{ $item->name }}" style="width: 80px; height: auto;"></a>
                                         </td>
 
-                                        <td class="li-product-name"><a href="#">{{ $item->name }}</a></td>
-                                        <td class="li-product-price"><a href="#">{{ $item->price }}</a></td>
+                                        <td class="li-product-name">{{ $item->name }}</td>
+                                        <td class="li-product-price" style="color: black;">
+                                            {{ formatCurrency($item->price) }}
+                                        </td>
 
                                         <td class="li-product-stock-status">
-                                            <span class="{{ $item->active ? 'in-stock' : 'out-stock' }}">{{ $item->active ? 'In Stock' : 'Out of Stock' }}</span>
+                                            <span class="text-primary {{ $item->active ? 'in-stock' : 'out-stock' }}">
+                                                {{ $item->active ? 'In Stock' : 'Out of Stock' }}
+                                            </span>
                                         </td>
+
                                         <td class="li-product-add-cart">
-                                            <a href="{{ route('cart.add', $item->id) }}">Add to Cart</a>
+                                            <form action="{{ route('cart.add', $item->product_id) }}" method="POST" style="display: inline;">
+                                                @csrf
+                                                <button class="btn btn-dark" type="submit" style="border-radius: 0px; cursor: pointer;">
+                                                    ADD TO CART
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
-                                @endforeach
+                                @empty
+                                    <tr>
+                                        <td colspan="6" style="text-align: center; font-size: 16px; color: #ff0000;">
+                                            Không có sản phẩm trong danh sách yêu thích.
+                                        </td>
+                                    </tr>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>
                     <div class="pagination-wrapper mt-40 d-flex justify-content-end">
                         {{ $wishlist->links() }}
                     </div>
+
+                    @include('admin.alert')
                 </div>
             </div>
         </div>
     </div>
-    <!--Wishlist Area End-->
+    <!-- Wishlist Area End -->
 @endsection

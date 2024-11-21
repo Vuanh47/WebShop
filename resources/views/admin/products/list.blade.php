@@ -1,6 +1,7 @@
 @extends('admin.main')
 
 @section('content')
+<div class="card card-primary card-outline mb-4">
     <table class="table">
         <thead>
             <tr>
@@ -10,10 +11,9 @@
                 <th>Mô Tả</th>
                 <th>Số Lượng</th>
                 <th>Giá Gốc</th>
-                <th>Giá Khuyến Mãi</th>
+                <th>Giá Sale</th>
                 <th>Active</th>
                 <th>Ảnh</th>
-                <th>Updated At</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -26,8 +26,8 @@
                 <td>{{ $product->category }}</td>
                 <td>{{ $product->description }}</td>
                 <td>{{ $product->quality }}</td>
-                <td>{{ $product->price }}</td>
-                <td>{{ $product->price_sale }}</td>
+                <td>{{ number_format($product->price, 0, ',', '.') }} </td>
+                <td>{{ number_format( $product->price_sale, 0, ',', '.') }} </td>
                 <td>
                     @if($product->active == 1)
                         <button class="btn btn-success btn-sm mt-1">Yes</button>
@@ -37,7 +37,6 @@
                 </td>
 
                 <td><a href="/storage/uploads/{{ $product->thumb }}"><img src="/storage/uploads/{{ $product->thumb }}" width="100px"></a></td>
-                <td>{{ $product->updated_at }}</td>
                 
                 <!-- Nút Sửa -->
                 <td>
@@ -63,4 +62,8 @@
             @endforelse
         </tbody>
     </table>
+    <div class="d-flex justify-content-center">
+        {{ $products->links() }}
+    </div>
+</div>
 @endsection

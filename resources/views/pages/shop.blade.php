@@ -35,26 +35,35 @@
                                         </div>
                                         <h4><a class="product_name" href="{{ route('details', $product->id) }}">{{ $product->name }}</a></h4>
                                         <div class="price-box">
-                                            <span class="new-price"  style="color: red; font-size: 18px;">{{ $product->price_sale }}</span>
-                                           
-                                                <span class="old-price">{{ $product->price }}</span>
-                                                <?php
-                                                    $price = floatval($product->price);
-                                                    $price_sale = floatval($product->price_sale);
+                                            <span class="new-price"  style="color: red; font-size: 18px;">
+                                                {{ formatCurrency($product->price_sale) }}
+                                            </span>
+                                            <span class="old-price">
+                                                {{ formatCurrency($product->price) }}
+                                            </span>
+                                            <?php
+                                                $price = floatval($product->price);
+                                                $price_sale = floatval($product->price_sale);
 
-                                                    $discount_percentage = (($price - $price_sale) / $price) * 100;
-                                                ?>
-                                                <span class="discount-percentage">-{{ number_format($discount_percentage, 0) }}%</span>
-                                         
+                                                $discount_percentage = (($price - $price_sale) / $price) * 100;
+                                            ?>
+                                            <span class="discount-percentage">-{{ number_format($discount_percentage, 0) }}%</span>
                                         </div>
                                     </div>
                                     <div class="add-actions">
                                         <ul class="add-actions-link">
                                             <li class="add-cart active">
-                                                <a href="{{ route('cart', $product->id) }}">Add to cart</a>
+                                                <form action="{{ route('cart.add', $product->id) }}" method="POST" style="display: inline;">
+                                                    @csrf
+                                                    <button type="submit" style="background: none; border: none; padding: 0; cursor: pointer;">
+                                                        ADD TO CART
+                                                    </button>
+                                                </form>
                                             </li>
+
                                             <li>
-                                                <a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter">
+                                                
+                                                <a href="{{ route('details', $product->id) }}" title="quick view" class="quick-view-btn" >
                                                     <i class="fa fa-eye"></i>
                                                 </a>
                                             </li>
@@ -80,11 +89,12 @@
                     </div>
                 @endif
             </div>
-
+            
             <!-- Pagination -->
             <div class="pagination-wrapper mt-40 d-flex justify-content-end">
                 {{ $products->links() }}
             </div>
+            @include('admin.alert')
         </div>
     </div>
     <!-- Content Wraper Area End Here -->

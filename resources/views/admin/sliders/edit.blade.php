@@ -11,8 +11,9 @@
         </div> <!--end::Header--> 
 
         <!--begin::Form-->
-        <form action="{{route('slider.update',$slider->id)}}" method="post"> 
-            <!--begin::Body-->
+        <form action="{{ route('slider.update', $slider->id) }}" method="POST">
+            @csrf
+            @method('PUT')   <!--begin::Body-->
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-6"> 
@@ -74,7 +75,7 @@
                 </span>
             </div> <!--end::Footer-->
 
-            @csrf
+        
         </form> <!--end::Form-->
         
 

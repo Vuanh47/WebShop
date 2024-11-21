@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Customer\CreateFormRequest;
-use App\Models\Customer; // Thêm import cho Customer model
-use App\Http\Service\Customer\CustomerService; // Sửa lại import
+use App\Http\Service\Cart\CartService;
+use App\Models\Customer; 
+use App\Http\Service\Customer\CustomerService; 
 use App\Http\Service\Menu\MenuService;
+use App\Models\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -15,21 +17,30 @@ class CustomerController extends Controller
 {
     protected $customerService;
     protected $menuService;
+    protected $cartService;
 
 
-    public function __construct(CustomerService $customerService,MenuService $menuService) {
+    public function __construct(CustomerService $customerService,MenuService $menuService,CartService $cartService) {
         $this->customerService = $customerService; 
         $this->menuService = $menuService; 
+        $this->cartService = $cartService; 
     }
 
 
 
     public function login()
     {
+        $customerID = session('customerID');
+        $count_cart = Cart::where('customer_id',$customerID)->count();
+        $total = Cart::where('customer_id', $customerID)->sum('total');
+       
         return view('pages.login', [
             'title' => 'login',  
+            'carts' => $this->cartService->getAll(),
             'menus' => $this->menuService->getParent(), 
             'count' => 3,
+            'total' => $total,
+            'count_cart' => $count_cart,
         ]);
     }
 
@@ -53,9 +64,17 @@ class CustomerController extends Controller
                 'email' => $request->input('email'),
                 'password' => $request->input('password')])){
 
-                 $customerName = Auth::guard('cus')->user()->name;
-                    // Lưu tên khách hàng vào session để hiển thị trên header
-                 session(['customerName' => $customerName]);
+                $customerName = Auth::guard('cus')->user()->name;
+                $customerID = Auth::guard('cus')->user()->id;
+                $countWishlist = $this->customerService->countWishlistById($customerID);
+                
+
+                // Lưu tên khách hàng vào session để hiển thị trên header
+                session(['countWishlist' => $countWishlist]);       
+                session(['customerName' => $customerName]);
+                session(['customerID' => $customerID]);
+
+                
         return redirect()->route('index');
         }
 

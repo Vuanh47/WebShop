@@ -69,16 +69,18 @@
                                         </ul>
                                     </div>
                                     <div class="price-box">
-                                        <span class="new-price">{{ $product->price_sale }} VND</span>
-                                        <span class="old-price">{{ $product->price }} VND</span>
-                                        <?php
+                                        <span class="new-price">{{ formatCurrency($product->price_sale) }}</span>
+                                        <span class="old-price">{{ formatCurrency($product->price) }}</span>
+                                        
+                                        @php
                                             $price = floatval($product->price);
                                             $price_sale = floatval($product->price_sale);
 
                                             $discount_percentage = (($price - $price_sale) / $price) * 100;
-                                        ?>
+                                        @endphp
                                         <span class="discount-percentage">-{{ number_format($discount_percentage, 0) }}%</span>
                                     </div>
+
 
                                     <div class="product-desc">
                                         <p>
@@ -87,17 +89,23 @@
                                     </div>
                                     
                                     <div class="single-add-to-cart">
-                                        <form action="#" class="cart-quantity">
-                                            <div class="quantity">
-                                                <label>Quantity</label>
-                                                <div class="cart-plus-minus">
-                                                    <input class="cart-plus-minus-box" value="1" type="text">
-                                                    <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
-                                                    <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
+                                    <form action="{{ route('cart.add', $product->id) }}" method="POST" style="display: inline;">
+                                            @csrf
+                                            <div class="cart-quantity">
+                                                <div class="quantity">
+                                                    <label for="quantity">Quantity</label>
+                                                    <div class="cart-plus-minus">
+                                                        <input class="cart-plus-minus-box" value="1" type="number" name="quantity" id="quantity" min="1">
+                                                        <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
+                                                        <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
+                                                    </div>
                                                 </div>
+                                                <button type="submit" class="btn btn-warning" style="height: 50px; width: 200px; border: none; padding: 0; cursor: pointer;">
+                                                    ADD TO CART
+                                                </button>
                                             </div>
-                                            <button class="add-to-cart" type="submit">Add to cart</button>
                                         </form>
+
                                     </div>
                                     <div class="product-additional-info pt-25">
                                         <a class="wishlist-btn" href="wishlist.html"><i class="fa fa-heart-o"></i>Add to wishlist</a>
@@ -200,22 +208,23 @@
                                         <a class="review-links" href="#" data-toggle="modal" data-target="#mymodal">Write Your Review!</a>
                                     </div>
                                     <!-- Begin Quick View | Modal Area -->
-                                    <div class="modal fade modal-wrapper" id="mymodal" >
+                                   <!-- Begin Quick View | Modal Area -->
+                                    <div class="modal fade modal-wrapper" id="mymodal">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-body">
                                                     <h3 class="review-page-title">Write Your Review</h3>
                                                     <div class="modal-inner-area row">
                                                         <div class="col-lg-6">
-                                                           <div class="li-review-product">
-                                                               <img src="{{asset('user/images/product/large-size/3.jpg')}}" alt="Li's Product">
-                                                               <div class="li-review-product-desc">
-                                                                   <p class="li-product-name">Today is a good day Framed poster</p>
-                                                                   <p>
-                                                                       <span>Beach Camera Exclusive Bundle - Includes Two Samsung Radiant 360 R3 Wi-Fi Bluetooth Speakers. Fill The Entire Room With Exquisite Sound via Ring Radiator Technology. Stream And Control R3 Speakers Wirelessly With Your Smartphone. Sophisticated, Modern Design </span>
-                                                                   </p>
-                                                               </div>
-                                                           </div>
+                                                            <div class="li-review-product">
+                                                                <img src="{{ asset('user/images/product/large-size/3.jpg') }}" alt="Li's Product">
+                                                                <div class="li-review-product-desc">
+                                                                    <p class="li-product-name">Today is a good day Framed poster</p>
+                                                                    <p>
+                                                                        <span>Beach Camera Exclusive Bundle - Includes Two Samsung Radiant 360 R3 Wi-Fi Bluetooth Speakers. Fill The Entire Room With Exquisite Sound via Ring Radiator Technology. Stream And Control R3 Speakers Wirelessly With Your Smartphone. Sophisticated, Modern Design </span>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <div class="li-review-content">
@@ -223,39 +232,51 @@
                                                                 <div class="feedback-area">
                                                                     <div class="feedback">
                                                                         <h3 class="feedback-title">Our Feedback</h3>
-                                                                        <form action="#">
+                                                                        <form action="{{route('comment.add')}}" method="post" enctype="multipart/form-data">
+                                                                            @csrf
                                                                             <p class="your-opinion">
-                                                                                <label>Your Rating</label>
+                                                                                <label for="star">Your Rating</label>
+                                                                                <input type="hidden" name="customer_id" value="{{$customer_id}}">
+                                                                                <input type="hidden" name="product_id" value="{{$product->id}}">
+
                                                                                 <span>
-                                                                                    <select class="star-rating">
-                                                                                      <option value="1">1</option>
-                                                                                      <option value="2">2</option>
-                                                                                      <option value="3">3</option>
-                                                                                      <option value="4">4</option>
-                                                                                      <option value="5">5</option>
+                                                                                    <select class="star-rating" name="star" required>
+                                                                                        <option value="1">1</option>
+                                                                                        <option value="2">2</option>
+                                                                                        <option value="3">3</option>
+                                                                                        <option value="4">4</option>
+                                                                                        <option value="5">5</option>
                                                                                     </select>
                                                                                 </span>
                                                                             </p>
                                                                             <p class="feedback-form">
-                                                                                <label for="feedback">Your Review</label>
-                                                                                <textarea id="feedback" name="comment" cols="45" rows="8" aria-required="true"></textarea>
+                                                                                <label for="content">Your Review</label>
+                                                                                <textarea id="content" name="content" cols="45" rows="8" required></textarea>
                                                                             </p>
                                                                             <div class="feedback-input">
                                                                                 <p class="feedback-form-author">
-                                                                                    <label for="author">Name<span class="required">*</span>
-                                                                                    </label>
-                                                                                    <input id="author" name="author" value="" size="30" aria-required="true" type="text">
-                                                                                </p>
-                                                                                <p class="feedback-form-author feedback-form-email">
-                                                                                    <label for="email">Email<span class="required">*</span>
-                                                                                    </label>
-                                                                                    <input id="email" name="email" value="" size="30" aria-required="true" type="text">
-                                                                                    <span class="required"><sub>*</sub> Required fields</span>
-                                                                                </p>
-                                                                                <div class="feedback-btn pb-15">
-                                                                                    <a href="#" class="close" data-dismiss="modal" aria-label="Close">Close</a>
-                                                                                    <a href="#">Submit</a>
+                                                                                <div class="form-group mb-3"> 
+                                                                                <label for="thumb" class="form-label">Chọn Ảnh</label>
+                                                                                <div class="mb-3">
+                                                                                        <input type="file" id="imageUpload" name="thumb_path" accept=".png, .jpg, .jpeg" onchange="previewImage(this)">
+                                                                                    </div>
+
+                                                                                <!-- Trường ẩn để lưu đường dẫn ảnh sau khi tải lên -->
+                                                                                <input type="hidden" name="thumb" id="thumb" >
+
+                                                                                <div class="avatar-preview">
+                                                                                    <!-- Hiển thị ảnh từ server hoặc ảnh mặc định -->
+                                                                                    <div id="imagePreview" style="background-image: url('{{ $imageUrl }}'); width: 200px; height: 200px; background-size: cover; background-position: center;"></div>
                                                                                 </div>
+
+                                                                                </p>
+                                                                            </div>
+                                                        
+
+                                                                            <!-- Submit and Close buttons -->
+                                                                            <div class="feedback-btn pb-15">
+                                                                                <button type="submit" class="btn btn-dark m-1" >Submit</button>
+                                                                                <button type="button" class="btn btn-dark m-1" data-dismiss="modal" aria-label="Close">Close</button>
                                                                             </div>
                                                                         </form>
                                                                     </div>
@@ -267,14 +288,17 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>   
+                                    </div>
                                     <!-- Quick View | Modal Area End Here -->
+
                                 </div>
                             </div>
                         </div>
                     </div>
+                    @include('admin.alert')
                 </div>
             </div>
+           
             <!-- Product Area End Here -->
             <!-- Begin Li's Laptop Product Area -->
             <section class="product-area li-laptop-product pt-30 pb-50">
@@ -662,4 +686,55 @@
                 </div>
             </div>   
             <!-- Quick View | Modal Area End Here -->
+@endsection
+
+@section('footer')
+    <script>   
+        function previewImage(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                // Hiển thị ảnh mới trong thẻ div#imagePreview
+                document.getElementById('imagePreview').style.backgroundImage = 'url(' + e.target.result + ')';
+            }
+            reader.readAsDataURL(input.files[0]); // Đọc file ảnh mới
+
+            // Gửi ảnh lên server thông qua AJAX
+            var formData = new FormData();
+            formData.append('thumb', input.files[0]); // Đính kèm file ảnh đã chọn
+
+            // Gọi AJAX để upload ảnh
+            fetch('{{ route("upload.services") }}', {
+    method: 'POST',
+    headers: {
+        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+    },
+    body: formData
+})
+.then(response => response.text())  // Sử dụng .text() thay vì .json()
+.then(text => {
+    console.log('Response Text:', text);  // In ra nội dung phản hồi từ server
+
+    // Kiểm tra nếu phản hồi là HTML (chẳng hạn trang lỗi hoặc redirect)
+    if (text.includes('<html')) {
+        throw new Error('Server returned HTML instead of JSON');
+    }
+
+    const data = JSON.parse(text);  // Phân tích nếu phản hồi là JSON
+    console.log('Thành công:', data);
+    if (data.success) {
+        const imageUrl = '/storage/' + data.filePath;
+        document.getElementById('imagePreview').style.backgroundImage = 'url(' + imageUrl + ')';
+        document.getElementById('thumb').value = data.thumb;
+    }
+})
+.catch((error) => {
+    console.error('Lỗi:', error);
+});
+
+
+        }
+    }
+   
+    </script>
 @endsection

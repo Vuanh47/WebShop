@@ -3,18 +3,20 @@ namespace App\Http\Service\Customer;
 
 use App\Models\Customer;
 use App\Models\Menu;
+use App\Models\Wishlist;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Log;
 
+
 class CustomerService{
 
    
 
     public function getAll(){
-        return Menu::orderByDesc('id')->paginate(20);
+        return Customer::orderByDesc('id')->paginate(20);
     }
     public function create($request){    
         try {
@@ -45,6 +47,9 @@ class CustomerService{
         }
         return true;
     }
-    
+    public function countWishlistById($customerID)
+    {
+        return Wishlist::where('customer_id', $customerID)->count(); 
+    }
 
 }

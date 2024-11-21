@@ -22,14 +22,18 @@
                          <input type="text" name="name" class="form-control" id="name" placeholder="Nhập Tên Sản Phẩm">
                      </div>
                     
-                        <div class="col-md-6 form-group mb-3"> 
-                            <label for="category" class="form-label">Danh Mục</label> 
-                            <select name="category" id="category" class="form-control">
-                                @foreach ($menus as $menu)
-                                    <option value="{{$menu->name}}">{{$menu->name}}</option>
-                                @endforeach
-                            </select>  
-                        </div>
+                     <div class="col-md-6 form-group mb-3"> 
+                        <label for="category" class="form-label">Danh Mục</label> 
+                        <select name="menu_id" id="menu_id" class="form-control" onchange="updateCategory()">
+                            @foreach ($menus as $menu)
+                                <option value="{{$menu->id}}" data-category="{{$menu->name}}">{{$menu->name}}</option>
+                            @endforeach
+                        </select>  
+                        <!-- Trường ẩn để gửi tên danh mục -->
+                        <input type="hidden" name="category" id="category">
+                    </div>
+
+
 
                         <div class="col-md-6 form-group mb-3"> 
                             <label for="quality" class="form-label">Số Lượng Sản Phẩm</label> 
@@ -157,5 +161,14 @@
 
         }
     }
+       
+        function updateCategory() {
+            const menuSelect = document.getElementById("menu_id");
+            const selectedOption = menuSelect.options[menuSelect.selectedIndex];
+            document.getElementById("category").value = selectedOption.getAttribute("data-category");
+        }
+
+        // Khởi tạo giá trị ban đầu của `category`
+        document.addEventListener("DOMContentLoaded", updateCategory);
     </script>
 @endsection

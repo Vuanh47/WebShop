@@ -1,6 +1,7 @@
 @extends('admin.main')
 
 @section('content')
+
     <table class="table">
         <thead>
             <tr>

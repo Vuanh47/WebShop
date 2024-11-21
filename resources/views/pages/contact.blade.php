@@ -15,16 +15,16 @@
                                 <h3 class="contact-page-title">Contact Us</h3>
                                    <div class="single-contact-block">
                                     <h4><i class="fa fa-fax"></i> Address</h4>
-                                    <p>Số 450 Đường Trần Đại Nghĩa, Điện Ngọc, Ngũ Hành Sơn, Đà Nẵng 550000</p>
+                                    <p>{{$customer->address}}</p>
                                 </div>
                                 <div class="single-contact-block">
                                     <h4><i class="fa fa-phone"></i> Phone</h4>
-                                    <p>Mobile: (+84)328563246</p>
+                                    <p>Mobile: {{$customer->phone}}</p>
                                     <p>Hotline: 1009 678 456</p>
                                 </div>
                                 <div class="single-contact-block last-child">
                                     <h4><i class="fa fa-envelope-o"></i> Email</h4>
-                                    <p>daovuanh2207@gmail.com</p>
+                                    <p>{{$customer->email}}</p>
                                     <p>support@hastech.company</p>
                                 </div>
                             </div>

@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Slider\CreateFormRequest;
 use App\Http\Service\Slider\SliderService;
 use App\Models\Slider;
+use Illuminate\Http\Request;
 
 class SliderController extends Controller{
     protected $sliderService;
@@ -58,7 +59,9 @@ class SliderController extends Controller{
         ]);
     }
 
-    public function update($id){
-
+    public function update(Request $request,$id){
+        $slider = Slider::findOrFail($id);
+        $slider->update($request->all());
+        return redirect()->route('slider.list')->with('success', 'Menu updated successfully!');
     }
 }

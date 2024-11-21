@@ -32,7 +32,7 @@ class ProductController extends Controller
     public function store(CreateFormRequest $request)
     {
         $result = $this->productService->creat($request);
-        return redirect()->back();
+        return redirect()->route('product.list');
     }
 
     public function index(){
@@ -62,12 +62,11 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
         $products = Product::all(); 
-         // Tạo biến img với đường dẫn đến hình ảnh tương ứng
         $imageUrl = '/storage/uploads/' . $product->thumb;
         return view('admin.products.edit', [
             'imageUrl' => $imageUrl,
-            'product' => $product, // Truyền danh mục hiện tại
-            'products' => $products, // Truyền danh sách các danh mục
+            'product' => $product, 
+            'products' => $products, 
             'title' => 'Chỉnh sửa Danh Mục'
         ]);
         

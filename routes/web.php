@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminOderController;
 use App\Http\Controllers\Admin\MainController;
 use App\Http\Controllers\Admin\MenuController;
+use App\Http\Controllers\Admin\OderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\UploadController;
@@ -12,15 +14,20 @@ use App\Http\Controllers\Page\CartController;
 use App\Http\Controllers\Page\CheckOutController;
 use App\Http\Controllers\Page\ContactController;
 use App\Http\Controllers\Page\HomeCotroller;
+use App\Http\Controllers\Page\OrderDetailController;
+use App\Http\Controllers\Page\OrderHistory;
 use App\Http\Controllers\Page\ShopController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Users\LoginController;
 use App\Http\Controllers\Admin\Users\RegisterController;
+use App\Http\Controllers\Admin\VoucherController;
 use App\Http\Controllers\MainCotroller;
 use App\Http\Controllers\Page\DetailsController;
 use App\Http\Controllers\Page\WishlistController;
 use App\Http\Middleware\EnsureUserIsAuthenticated;
 use App\Http\Controllers\Customer\CustomerController;
+use App\Http\Controllers\Page\OrderController;
+use App\Http\Controllers\Page\OrderHistoryController;
 
 Route::prefix('admin/user')->group(function(){
     Route::get('login', [LoginController::class, 'index'])->name('admin.login');
@@ -29,34 +36,63 @@ Route::prefix('admin/user')->group(function(){
 });
 #pages
 Route::prefix('/')->group(function () {
-    Route::post('register', [CustomerController::class, 'register'])->name('register');
-    Route::post('login/store',[CustomerController::class, 'store'])->name('store');
-    Route::get('login', [CustomerController::class, 'login'])->name('login');
-    Route::post('/logout', [CustomerController::class, 'logout'])->name('logout');
+        // Authentication Routes
+        Route::post('register', [CustomerController::class, 'register'])->name('register');
+        Route::post('login/store', [CustomerController::class, 'store'])->name('store');
+        Route::get('login', [CustomerController::class, 'login'])->name('login');
+        Route::post('/logout', [CustomerController::class, 'logout'])->name('logout');
 
-    Route::get('/', [HomeCotroller::class, 'index'])->name('index');
-    Route::get('/shop', [ShopController::class, 'index'])->name('shop');
-    Route::get('/blog', [BlogController::class, 'details'])->name('blog.details');
-    Route::get('/cart', [CartController::class, 'index'])->name('cart');
-    Route::get('/cart/{id}', [CartController::class, 'add'])->name('cart.add');
+        // Home Routes
+        Route::get('/', [HomeCotroller::class, 'index'])->name('index');
+        Route::get('/about', [AboutController::class, 'index'])->name('about');
 
-    Route::get('/about', [AboutController::class, 'index'])->name('about');
-    Route::get('/contact', [ContactController::class, 'index'])->name('contact');
-    Route::get('/search', [ShopController::class, 'search'])->name('search');
-    Route::get('/product-details/{id}', [DetailsController::class, 'details'])->name('details');
-    Route::get('/checkout', [CheckOutController::class, 'index'])->name('checkout');
+        // Shop Routes
+        Route::get('/shop', [ShopController::class, 'index'])->name('shop');
+        Route::get('/search', [ShopController::class, 'search'])->name('search');
+        Route::get('/product-details/{id}', [DetailsController::class, 'details'])->name('details');
+
+      
+
+        Route::post('coupon', [CartController::class, 'coupon'])->name('coupon');
+
+        // Blog Routes
+        Route::get('/blog-details/{productId?}', [BlogController::class, 'details'])->name('blog.details');
+
+
+        // Checkout Routes
+        Route::get('/checkout', [CheckOutController::class, 'index'])->name('checkout');
+
+        Route::prefix('order')->group(function () {
+            Route::post('/', [OrderController::class, 'index'])->name('order');
+            Route::get('/', [OrderController::class, 'index'])->name('order');
+
+            Route::post('/store', [OrderController::class, 'store'])->name('order.add');
+        });
+
+        Route::get('/order_details/{id}', [OrderDetailController::class, 'index'])->name('order_details');
+
 
     #wishlist
-   // web.php
    Route::middleware('cus')->group(function () {
         Route::prefix('wishlist')->group(function () {
             Route::get('/', [WishlistController::class, 'index'])->name('wishlist');
-            Route::post('/store/{id}', [WishlistController::class, 'store'])->name('wishlist.store');
+            Route::post('/store/{id}', [WishlistController::class, 'addToWishlist'])->name('wishlist.store');
             Route::delete('/remove/{id}', [WishlistController::class, 'remove'])->name('wishlist.remove');
         });
-      });
-    });
+        Route::prefix('cart')->group(function () {
+            Route::get('/', [CartController::class, 'index'])->name('cart');
+            Route::post('/{id}', [CartController::class, 'store'])->name('cart.add');
+            Route::delete('/remove/{id}', [CartController::class, 'remove'])->name('cart.delete');
+            Route::post('/update/{id}', [CartController::class, 'update'])->name('cart.update');
+        });
+        // web.php (routes)
+        Route::post('product-details/comment', [BlogController::class, 'store'])->name('comment.add');
+        Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 
+        Route::get('/order_history', [OrderHistoryController::class, 'index'])->name('order_history');
+
+    });
+});
 
 
 Route::middleware('admin')->group(function () {
@@ -64,7 +100,6 @@ Route::middleware('admin')->group(function () {
     Route::prefix('admin')->group(function(){
 
         Route::get('/main', [MainController::class , 'index'])->name('admin');
-        // Route::get('', [MainController::class , 'index']);
 
         #menu
         Route::prefix('menu')->group(function(){
@@ -101,9 +136,29 @@ Route::middleware('admin')->group(function () {
 
         });
 
+           #Vouchers
+           Route::prefix('voucher')->group(function(){
+            Route::get('add', [VoucherController::class , 'create'])->name('voucher.add');
+            Route::post('add', [VoucherController::class , 'store'])->name('voucher.store');
+            Route::get('list', [VoucherController::class , 'index'])->name('voucher.list');
+            Route::get('{id}/edit', [VoucherController::class, 'edit'])->name('voucher.edit');
+            Route::put('{id}', [VoucherController::class, 'update'])->name('voucher.update');
+            Route::delete('{id}', [VoucherController::class, 'destroy'])->name('voucher.destroy');
+          
+
+
+        });
+
+
+        #Oder
+        Route::prefix('order')->group(function(){
+            Route::get('/order/', [AdminOderController::class, 'index'])->name('order.admin');
+
+        });
 
         #upload img
         Route::post('upload/services', [UploadController::class, 'update'])->name('upload.services');
+
 
 
     });

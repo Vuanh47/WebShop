@@ -5,12 +5,13 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Favicon -->
-  
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
+        <link rel="stylesheet" href="{{asset('user/css/font-awesome.css')}}"/>
         <!-- SweetAlert CSS -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+        <link rel="stylesheet" href="{{asset('user/css/libs.css')}}">
         <!-- SweetAlert JS -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+        <script src="{{asset('user/js/libs.js')}}"></script>
 
         <link rel="shortcut icon" type="image/x-icon" href="{{asset('user/images/favicon.png')}}">
         <!-- Material Design Iconic Font-V2.2.0 -->
@@ -44,8 +45,11 @@
         <!-- Responsive CSS -->
         <link rel="stylesheet" href="{{asset('user/css/responsive.css')}}">
         <!-- Modernizr js -->
-         
+        <link rel="stylesheet" href="{{asset('user/css/slider.css')}}">
+        <link rel="stylesheet" href="{{asset('user/css/font-awesome.min.css')}}">
+
         <script src="{{asset('user/js/vendor/modernizr-2.8.3.min.js')}}"></script>
+        
         @yield('head')
 </head>
 <header class="li-header-4">
@@ -71,13 +75,13 @@
                                             <div class="ht-language-trigger"><span>Language</span></div>
                                             <div class="language ht-language">
                                                 <ul class="ht-setting-list">
-                                                    <div id="google_translate_element"></div>
+                                                <div id="google_translate_element"></div>
                                                     <script type="text/javascript">
-                                                        function googleTranslateElementInit() {
-                                                            new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
-                                                        }
+                                                    function googleTranslateElementInit() {
+                                                        new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+                                                    }
                                                     </script>
-                                                <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+                                                    <script type="text/javascript" src="{{asset('user/js/libggdich.js')}}"></script>
                                                 </ul>
                                             </div>
                                         </li>
@@ -85,7 +89,7 @@
                                         <div class="login">
                                             @if(session()->has('customerName'))
                                                 <a href="#" class="user-name" style="display: flex; align-items: center;">
-                                                    <i class="fa-solid fa-user"></i>
+                                                   </i>
                                                     <span style="margin-left: 5px;">{{ session('customerName') }}</span>
                                                 </a>
                                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="margin-left: 10px;">
@@ -123,13 +127,14 @@
                             <div class="col-lg-9 pl-0 ml-sm-15 ml-xs-15">
                                 <!-- Begin Header Middle Searchbox Area -->
                                 <form action="{{ route('search') }}" method="GET" class="hm-searchbox">
-                                    <select class="nice-select select-search-category">
+
+                                    <select name="menu_id" class="nice-select select-search-category">
                                         <option value="0">All</option>                          
                                         @foreach ($menus as $menu)
-                                            <option value="{{$menu->id}}">{{$menu->name}}</option>
+                                            <option value="{{$menu->id}}">{{$menu->name}}</option> <!-- Sử dụng $menu->id -->
                                         @endforeach                     
-                                     
                                     </select>
+
                                     <input type="text" name="query" placeholder="Enter your search key ...">
                                     <button class="li-btn" type="submit"><i class="fa fa-search"></i></button>
                                 </form>
@@ -149,39 +154,36 @@
                                         <li class="hm-minicart">
                                             <div class="hm-minicart-trigger">
                                                 <span class="item-icon"></span>
-                                                <span class="item-text">£80.00
-                                                    <span class="cart-item-count">2</span>
+                                                <span class="item-text">{{ formatCurrency($total)}}
+                                                    <span class="cart-item-count">{{$count_cart}}</span>
                                                 </span>
                                             </div>
                                             <span></span>
                                             <div class="minicart">
                                                 <ul class="minicart-product-list">
-                                                    <li>
-                                                        <a href="single-product.php" class="minicart-product-image">
-                                                            <img src="{{asset('user/images/product/small-size/1.jpg')}}" alt="cart products">
+                                                <ul>
+                                                    @foreach ($carts as $cart)
+                                                        <li>
+                                                        <a href="" class="minicart-product-image">
+                                                            <img src="{{ asset('storage/uploads/' . $cart->thumb) }}" alt="cart products" width="55" height="55">
                                                         </a>
-                                                        <div class="minicart-product-details">
-                                                            <h6><a href="single-product.php">Aenean eu tristique</a></h6>
-                                                            <span>£40 x 1</span>
-                                                        </div>
-                                                        <button class="close">
-                                                            <i class="fa fa-close"></i>
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        <a href="single-product.php" class="minicart-product-image">
-                                                            <img src="{{asset('user/images/product/small-size/2.jpg')}}" alt="cart products">
-                                                        </a>
-                                                        <div class="minicart-product-details">
-                                                            <h6><a href="single-product.php">Aenean eu tristique</a></h6>
-                                                            <span>£40 x 1</span>
-                                                        </div>
-                                                        <button class="close">
-                                                            <i class="fa fa-close"></i>
-                                                        </button>
-                                                    </li>
+                                                            <div class="minicart-product-details">
+                                                                <h6><a href="">{{ $cart->name }}</a></h6>
+                                                                <span>{{ formatCurrency($cart->price)}} x {{ $cart->quantity }}</span>
+                                                            </div>
+                                                            <form action="{{ route('cart.delete', $cart->id) }}" method="POST" style="display: inline;">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" class="close" style="border: none; background: none; cursor: pointer;">
+                                                                <i class="fa fa-close"></i>
+                                                                </button>
+                                                            </form>
+                                                        </li>
+                                                    @endforeach
                                                 </ul>
-                                                <p class="minicart-total">SUBTOTAL: <span>£80.00</span></p>
+
+                                                </ul>
+                                                <p class="minicart-total">SUBTOTAL: <span>{{ formatCurrency($total)}}</span></p>
                                                 <div class="minicart-button">
                                                     <a href="{{route('cart')}}" class="li-button li-button-dark li-button-fullwidth li-button-sm">
                                                         <span>View Full Cart</span>
@@ -214,9 +216,11 @@
                                         <li><a href="{{ route('index') }}">Home</a></li>
                                         <li><a href="{{ route('shop') }}">Shop</a></li>
                                         <li><a href="{{ route('blog.details') }}">Blog</a></li>
-                                        <li><a href="{{ route('cart') }}">Shopping Cart</a></li>
+                                        <li><a href="{{route('cart')}}">Shopping Cart</a></li>
+                                        <li><a href="{{ route('order_history') }}">Order History</a></li>
                                         <li><a href="{{ route('about') }}">About Us</a></li>
                                         <li><a href="{{ route('contact') }}">Contact</a></li>
+
 
                                         </ul>
                                     </nav>

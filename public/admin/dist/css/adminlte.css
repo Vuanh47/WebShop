@@ -15157,5 +15157,16 @@ html.maximized-card {
 .img-size-32 {
   width: 32px;
 }
+.app-sidebar {
+  height: 100vh; /* Chiều cao của sidebar sẽ bằng chiều cao của cửa sổ trình duyệt */
+  overflow-y: auto; /* Thêm thanh cuộn theo chiều dọc khi nội dung vượt quá chiều cao */
+}
+
+/* Ẩn các menu con */
+.nav-treeview {
+  display: none;
+}
+
+
 
 /*# sourceMappingURL=adminlte.css.map */

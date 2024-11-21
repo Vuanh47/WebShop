@@ -2,6 +2,7 @@
 namespace App\Http\Service\Menu;
 
 use App\Models\Menu;
+use App\Models\Voucher;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Session;

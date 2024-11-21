@@ -3909,10 +3909,13 @@ thead {
 	margin-bottom: 30px;
 }
 .login-form {
+	margin-top: 10px;
   background-color: #ffffff;
   padding: 30px;
-  -webkit-box-shadow: 0px 5px 4px 0px rgba(0, 0, 0, 0.1);
-  box-shadow: 0px 5px 4px 0px rgba(0, 0, 0, 0.1); }
+  box-shadow: 0px -4px 8px 2px rgba(0, 0, 0, 0.05), 0px 6px 10px 2px rgba(0, 0, 0, 0.05);
+  border-radius: 10px; /* Bo tròn tất cả các góc với bán kính 10px */
+
+}
   .login-form label {
     display: block;
     font-size: 14px;
@@ -5554,8 +5557,199 @@ span.required {
     transform: scale(1.1); /* Phóng to chữ khi hover */
 }
 
+.li-product-thumbnail img {
+	width: 80px;  /* Đặt chiều rộng nhỏ hơn, bạn có thể điều chỉnh */
+	height: auto; /* Đảm bảo tỉ lệ hình ảnh không bị méo */
+	object-fit: cover; /* Cắt hình ảnh nếu cần để vừa với khung */
+}
+.btn-dark {
+    border-radius: 0px;
+    cursor: pointer;
+    background-color: #343a40; /* Màu nền ban đầu */
+    color: white; /* Màu chữ */
+    border: none;
+    transition: background-color 0.3s ease; /* Hiệu ứng chuyển màu mượt mà */
+}
+
+.btn-dark:hover {
+    background-color: #d5c616; /* Màu vàng khi hover */
+    color: white; /* Thay đổi màu chữ khi hover */
+
+}
+.slider-area .slider-shadow {
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+    min-height: 455px;
+    width: auto;
+    box-shadow: 0 8px 16px rgba(60, 64, 67, 0.1), 
+                0 4px 8px rgba(60, 64, 67, 0.08); /* Hiệu ứng bóng mờ nhẹ với màu xám nhạt */
+    border-radius: 10px; /* Làm tròn góc nhẹ nhàng */
+}
+
+.slider-area .slider-shadow:hover {
+    box-shadow: 0 12px 24px rgba(60, 64, 67, 0.15), 
+                0 6px 12px rgba(60, 64, 67, 0.1); /* Tăng bóng mờ khi hover với màu tương tự */
+    transition: box-shadow 0.4s ease-in-out; /* Hiệu ứng chuyển đổi mượt mà */
+}
+
+.cart-item-img {
+    width: 100px; /* Điều chỉnh chiều rộng theo ý muốn */
+    height: auto; /* Đảm bảo tỉ lệ hình ảnh không bị méo */
+    object-fit: cover; /* Đảm bảo hình ảnh lấp đầy khung mà không bị méo */
+    border-radius: 5px; /* Tùy chọn: Bo góc cho hình ảnh */
+}
+.cart-container {
+    max-width: 80%; /* Tăng chiều rộng tối đa của container */
+    margin: 0 auto; /* Canh giữa container */
+    padding: 20px; /* Thêm khoảng cách bên trong container */
+    font-size: 1.1rem; /* Tăng kích thước font chữ */
+}
+/* Container chung */
+.order-detail .container {
+    max-width: 1200px;
+    margin-top: 20px;
+}
+
+/* Card */
+.order-detail .card {
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: none;
+}
+
+/* Header của card */
+.order-detail .card-header {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #ddd;
+    padding: 20px;
+    text-align: center;
+}
+
+.order-detail .card-header h2 {
+    font-size: 30px;
+    color: #007bff;
+}
+
+/* Nội dung card */
+.order-detail .card-body {
+    padding: 20px;
+    background-color: #fff;
+}
+
+/* Thông tin đơn hàng */
+.order-detail .order-details-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.order-detail .order-details {
+    flex: 1;
+    min-width: 250px;
+    max-width: 48%;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.order-detail .order-detail-item {
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #555;
+}
+
+.order-detail .order-detail-item strong {
+    color: #333;
+}
+
+/* Table chi tiết đơn hàng */
+.order-detail .table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.order-detail .table th, .order-detail .table td {
+    text-align: center;
+    padding: 12px;
+    border: 1px solid #ddd;
+}
+
+.order-detail .table th {
+    background-color: #007bff;
+    color: white;
+}
+
+.order-detail .table td {
+    font-size: 16px;
+}
+
+.order-detail .text-end {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: right;
+}
+
+/* Footer */
+.order-detail .card-footer {
+    background-color: #f8f9fa;
+    padding: 10px;
+    text-align: center;
+}
+
+.order-detail .card-footer a {
+    text-decoration: none;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.order-detail .card-footer a:hover {
+    background-color: #0056b3;
+}
 
 
+
+    .page-section {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh; /* Đảm bảo chiều cao đủ để căn giữa */
+    }
+    .login-form {
+        background-color: #f7f7f7;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+
+   
+
+    .register-form {
+        height: 100%; /* Nút đăng ký sẽ chiếm toàn bộ chiều rộng form */
+    }
+
+	.custom-badge {
+		padding: 0.2rem 0.5rem; /* Giảm khoảng cách bên trong */
+		font-size: 0.9rem;      /* Kích thước chữ nhỏ hơn */
+		border-radius: 0.25rem; /* Bo tròn nhẹ nhàng hơn */
+	}
+	
+	.table td, 
+.table th {
+    text-align: center;      /* Căn giữa ngang */
+    vertical-align: middle;  /* Căn giữa dọc */
+}
+
+.order-detail .table th {
+    background-color: #3d3f40;
+    color: white;
+}
 
 /*----------------------------------------------------------------------------------------------------*/
 /*------------------------------------------> The End <-----------------------------------------------*/

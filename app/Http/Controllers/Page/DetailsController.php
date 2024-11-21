@@ -1,8 +1,10 @@
 <?php 
 namespace App\Http\Controllers\Page;
 
+use App\Http\Service\Cart\CartService;
 use App\Http\Service\Menu\MenuService;
 use App\Http\Service\Product\ProductService;
+use App\Models\Cart;
 use App\Models\Product;
 use App\Models\Wishlist;
 use Illuminate\Http\Request;
@@ -10,16 +12,23 @@ use Illuminate\Http\Request;
 class DetailsController{
     protected $menuService;
     protected $productService;
+    protected $cartService;
 
-    public function __construct(MenuService $menuService,ProductService $productService){
+
+    public function __construct(MenuService $menuService,ProductService $productService,CartService $cartService){
         $this->menuService = $menuService;
         $this->productService = $productService;
+        $this->cartService = $cartService;
 
     }
     public function details($id)
     {
-        $product = Product::find($id); // Sử dụng find hoặc findOrFail
-        $count = Wishlist::count();
+        $customerID = session('customerID');
+        $product = Product::find($id);
+        $customer_id = session('customerID');
+        $count = Wishlist::where('customer_id', $customer_id)->count();
+        $count_cart = Cart::where('customer_id',$customerID)->count();
+        $total = Cart::where('customer_id', $customerID)->sum('total');
         if (!$product) {
             return redirect()->back()->with('error', 'Sản phẩm không tồn tại.');
         }
@@ -33,8 +42,13 @@ class DetailsController{
             'title' => 'Detail Product',
             'menus' => $this->menuService->getParent(),
             'product' => $product,
+            'carts' => $this->cartService->getAll(),
             'countRelatedPro' => $countRelatedPro,
-            'count' => $count // Truyền $count vào view
+            'imageUrl' =>'',
+            'customer_id' => $customer_id,
+            'count' =>$count,
+            'total' => $total,
+            'count_cart' => $count_cart,
         ]);
     }
     

@@ -52,4 +52,23 @@ class Customer extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+        // Định nghĩa mối quan hệ với Wishlist
+        public function wishlists()
+        {
+            return $this->hasMany(Wishlist::class, 'customer_id'); // 'customer_id' là khóa ngoại
+        }
+
+        public function order()
+        {
+            return $this->hasMany(Wishlist::class, 'customer_id'); // 'customer_id' là khóa ngoại
+        }
+    
+       // App\Models\Customer.php
+        public function cart()
+        {
+            return $this->hasOne(Cart::class);  // Mối quan hệ một-một (Customer -> Cart)
+        }
+
+        
 }

@@ -72,7 +72,7 @@ return [
             'customer' => [
                 'driver' => 'eloquent',
                 'model' => App\Models\Customer::class,
-                'table' => 'customer', // cấu hình đúng bảng admin
+                'table' => 'customers', 
             ],
         ],
 
