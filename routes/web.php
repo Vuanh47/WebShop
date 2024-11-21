@@ -152,7 +152,9 @@ Route::middleware('admin')->group(function () {
 
         #Oder
         Route::prefix('order')->group(function(){
-            Route::get('/order/', [AdminOderController::class, 'index'])->name('order.admin');
+            Route::get('/', [AdminOderController::class, 'index'])->name('order.list');
+            Route::post('/{id}/next-status', [AdminOderController::class, 'nextStatus'])->name('orders.nextStatus');
+            Route::post('/{id}', [AdminOderController::class, 'detail'])->name('order.detail');
 
         });
 
