@@ -25,7 +25,7 @@
                 <td>{{ $product->name }}</td>
                 <td>{{ $product->category }}</td>
                 <td>{{ $product->description }}</td>
-                <td>{{ $product->quality }}</td>
+                <td>{{ $product->quantity }}</td>
                 <td>{{ number_format($product->price, 0, ',', '.') }} </td>
                 <td>{{ number_format( $product->price_sale, 0, ',', '.') }} </td>
                 <td>

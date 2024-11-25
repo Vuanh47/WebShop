@@ -46,7 +46,7 @@ class WishlistService{
         
             Wishlist::create([
                 'name' => $product->name,
-                'price' => $product->price,
+                'price' => $product->price_sale,
                 'thumb' => $product->thumb, 
                 'active' => $product->active, 
                 'customer_id' => $customerID, 

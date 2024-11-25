@@ -24,7 +24,7 @@ class CreateFormRequest extends FormRequest
         return [
             'name' => 'required',
             'email' => 'required|email|unique:customers,email', // Kiểm tra định dạng email và không được trùng
-            'password' =>'required',
+            'password' => 'required|min:6',
             'phone' =>'required',
             'address' =>'required',
 
@@ -36,7 +36,7 @@ class CreateFormRequest extends FormRequest
         return [
             'name.required' => 'Vui lòng nhập Tên',
             'email.required' => 'Vui lòng nhập email',
-            'password.required' => 'Vui lòng nhập Mật Khẩu',
+            'password.required' => 'Vui lòng nhập Mật Khẩu quá 6 kí tự',
             'phone.required' => 'Vui lòng nhập Số Điện Thoại',
             'address.required' => 'Vui lòng nhập Địa Chỉ',
             

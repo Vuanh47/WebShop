@@ -32,25 +32,30 @@
                                     </h2>
                                </div>
                                 <div class="product-active owl-carousel">
-                                    @foreach($menus as $menu)
-                                        <div class="col-lg-12">
-                                            <!-- single-product-wrap start -->
-                                            <div class="single-product-wrap">
-                                                <div class="product-image">
-                                                    <a href="single-product.html">
-                                                        <img src="{{ asset('/storage/uploads/' . $menu->thumb) }}" alt="{{ $menu->name }}">
-                                                    </a>
-                                                    <span class="sticker">New</span>
-                                                </div>
-                                                <div class="product_desc">
-                                                    <div class="product_desc_info">
-                                                        <h4><a class="product_name" href="single-product.html">{{ $menu->name }}</a></h4>
-                                                    </div>
+                                @foreach($menus as $menu)
+                                    <div class="col-lg-12">
+                                        <!-- single-product-wrap start -->
+                                        <div class="single-product-wrap">
+                                            <div class="product-image">
+                                                <a href="{{ route('search', ['menu_id' => $menu->id]) }}">
+                                                    <img src="{{ asset('/storage/uploads/' . $menu->thumb) }}" alt="{{ $menu->name }}">
+                                                </a>
+                                                <span class="sticker">New</span>
+                                            </div>
+                                            <div class="product_desc">
+                                                <div class="product_desc_info">
+                                                    <h4>
+                                                        <a class="product_name" href="{{ route('search', ['menu_id' => $menu->id]) }}">
+                                                            {{ $menu->name }}
+                                                        </a>
+                                                    </h4>
                                                 </div>
                                             </div>
-                                            <!-- single-product-wrap end -->
                                         </div>
-                                    @endforeach
+                                        <!-- single-product-wrap end -->
+                                    </div>
+                                @endforeach
+
                                 </div>
 
                             </div>

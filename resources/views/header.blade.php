@@ -188,7 +188,7 @@
                                                     <a href="{{route('cart')}}" class="li-button li-button-dark li-button-fullwidth li-button-sm">
                                                         <span>View Full Cart</span>
                                                     </a>
-                                                    <a href="{{route('checkout')}}" class="li-button li-button-fullwidth li-button-sm">
+                                                    <a href="" class="li-button li-button-fullwidth li-button-sm">
                                                         <span>Checkout</span>
                                                     </a>
                                                 </div>
@@ -215,7 +215,7 @@
                                         <ul>
                                         <li><a href="{{ route('index') }}">Home</a></li>
                                         <li><a href="{{ route('shop') }}">Shop</a></li>
-                                        <li><a href="{{ route('blog.details') }}">Blog</a></li>
+                                        <li><a href="{{ route('blog') }}">Blog</a></li>
                                         <li><a href="{{route('cart')}}">Shopping Cart</a></li>
                                         <li><a href="{{ route('order_history') }}">Order History</a></li>
                                         <li><a href="{{ route('about') }}">About Us</a></li>

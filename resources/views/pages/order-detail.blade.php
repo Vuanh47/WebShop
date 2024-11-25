@@ -78,14 +78,26 @@
             </table>
 
             <!-- Display Total Price -->
-            <p class="text-end"><strong>Total Amount:</strong> 
-                {{ number_format($order_details->sum(function($detail) { return $detail->quantity * $detail->price; }), 0, ',', '.') }}₫
+            <p class="text-end"><strong>Subtotal Amount:</strong> 
+                {{ formatCurrency( $order_details[0]->order->subtotal)}}
             </p>
+            <p class="text-end"><strong>Discount:</strong> 
+              {{ $order_details[0]->order->discount}}
+              @if($order_details[0]->order->type == 'percentage')
+                    %
+                @else
+                    VND
+                @endif
+            </p>
+            <p class="text-end"><strong>Total Amount:</strong> 
+                {{ formatCurrency( $order_details[0]->order->total_price)}}</p>
+
         </div>
 
         <div class="card-footer text-center mb-10">
-            <button href="{{ route('shop') }}" class="btn btn-danger">Continue Shopping</button>
+            <a href="{{ route('shop') }}" class="btn btn-dark">Continue Shopping</a>
         </div>
+
     </div>
 </div>
 

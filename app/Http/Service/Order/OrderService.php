@@ -7,6 +7,8 @@ use App\Models\OrderDetail;
 use App\Models\Product;
 use Illuminate\Support\Facades\Session;
 
+use function PHPSTORM_META\type;
+
 class OrderService {
 
     function store(){
@@ -34,12 +36,15 @@ class OrderService {
     public function create($request)
 {
     try {
-
+       
         $orderCode = 'ORDER-' . strtoupper(bin2hex(random_bytes(4))); // Ví dụ: ORDER-1A2B3C4D
         $order = Order::create([
             'id' => $orderCode,
             'customer_id' => $request->input('customer_id'),
-            'total_price' => $request->input('total'),
+            'total_price' => $request->input('totalValue'),
+            'discount' => $request->input('discount'),
+            'subtotal' => $request->input('subtotal'),
+            'type' => $request->input('type'),
             'shipping_address' => $request->input('shipping_address'),
             'payment_method' => $request->input('payment_method'),
             'email' => $request->input('email'),

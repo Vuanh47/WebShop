@@ -40,7 +40,7 @@
                                         <td class="li-product-thumbnail">
                                             <a href="#"><img src="/storage/uploads/{{$cart->thumb}}" data-thumb="{{ $cart->thumb }}" alt=""></a>
                                         </td>
-                                        <td class="li-product-name"><a href="#">{{ $cart->name }}</a></td>
+                                        <td class="li-product-name"><a href="{{route('details',$cart->product_id)}}">{{ $cart->name }}</a></td>
                                         <td class="li-product-price">
                                             <span class="amount">{{ number_format($cart->price, 0, ',', '.') }}</span>
                                         </td>
@@ -66,13 +66,7 @@
                 <div class="row mb-30">
                     <div class="col-12">
                         <div class="coupon-all">
-                            <form action="{{ route('coupon') }}" method="post" id="coupon-form">
-                                @csrf
-                                <div class="coupon">
-                                    <input id="code" class="input-text" name="code" placeholder="Coupon code" type="text">
-                                    <input class="button" name="apply_coupon" value="Apply coupon" type="submit">
-                                </div>
-                            </form>
+                           
                             <div class="coupon2">
                                 <button class="btn btn-dark" id="update-cart-btn" type="button">Update cart</button>
                             </div>

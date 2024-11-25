@@ -16,19 +16,25 @@
         @method('PUT')  <!-- Phương thức PUT để cập nhật dữ liệu -->
         <!--begin::Body-->
             <div class="card-body">
-                <div class="row">
-                       <div class="col-md-6 form-group mb-3"> 
+
+                <div class="form-group mb-3"> 
                             <label for="name" class="form-label">Tên Sản Phẩm</label> 
                             <input type="text" name="name" class="form-control" value="{{$product->name}}" id="name" placeholder="Nhập Tên Sản Phẩm">
-                        </div>
-                    
-                        <div class="col-md-6 form-group mb-3"> 
+                </div>
+
+                <div class="row">
+                      <div class="col-md-6 form-group mb-3"> 
                             <label for="category" class="form-label">Danh Mục</label> 
                             <select name="category" id="category" class="form-control">
                                
                                     <option value="{{$product->category}}">{{$product->category}}</option>
 
                             </select>  
+                        </div>
+
+                        <div class="col-md-6 form-group mb-3"> 
+                            <label for="quality" class="form-label">Số Lượng Sản Phẩm</label> 
+                            <input type="number" class="form-control" name="quality" id="quality" value="{{ $product->quantity }}" placeholder="Nhập Số Lượng Sản Phẩm">
                         </div>
                 </div>
 
@@ -44,11 +50,6 @@
                         </div>
                 </div>
 
-                
-                <div class="form-group mb-3"> 
-                    <label for="quality" class="form-label">Số Lượng Sản Phẩm</label> 
-                    <input type="number" class="form-control" name="quality" id="quality" value="{{ $product->quality }}" placeholder="Nhập Số Lượng Sản Phẩm">
-                </div>
 
                 <div class="form-group mb-3"> 
                     <label for="description" class="form-label">Mô Tả</label> 

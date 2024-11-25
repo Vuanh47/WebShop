@@ -29,7 +29,7 @@ class BlogController{
 
 
     }
-    public function details(){ 
+    public function index(){ 
 
         $products = Product::with(['blogs'])->get();
         $customerID = session('customerID');
@@ -37,10 +37,10 @@ class BlogController{
         $count_cart = Cart::where('customer_id',$customerID)->count();
         $total = Cart::where('customer_id', $customerID)->sum('total');
         // Lấy các blog chung, hoặc tất cả các blog nếu không cần lọc theo sản phẩm
-        $blogs = Blog::whereNull('product_id')->orWhereDoesntHave('product')->orderByDesc('id')->paginate(16);
+        $blogs = $this->blogService->getAll();
 
-        return view('pages.blogDetails', [
-            'title' => 'Blog Details',
+        return view('pages.blog', [
+            'title' => 'Blog',
             'menus' => $this->menuService->getParent(),
             'count' => $count,
             'carts' => $this->cartService->getAll(),
@@ -53,7 +53,28 @@ class BlogController{
 
     
     
-    
+    public function detail($id){
+   
+        $product = Product::find($id);
+        $customerID = session('customerID');
+        $count = Wishlist::where('customer_id', $customerID)->count();
+        $count_cart = Cart::where('customer_id',$customerID)->count();
+        $total = Cart::where('customer_id', $customerID)->sum('total');
+        $blogs = $product->blogs()->orderBy('created_at', 'desc')->paginate(4);
+
+        return view('pages.blogDetail', [
+            'title' => 'Blog Details',
+            'menus' => $this->menuService->getParent(),
+            'count' => $count,
+            'carts' => $this->cartService->getAll(),
+            'product' => $product,
+            'imageUrl' =>'',
+            'customer_id' => $customerID,
+            'blogs' => $blogs, 
+            'total' => $total,
+            'count_cart' => $count_cart,
+    ]);
+    }
     
 
     public function store(CreateFormRequest $request){

@@ -7,6 +7,7 @@ use App\Http\Service\Menu\MenuService;
 use App\Http\Service\Product\ProductService;
 use App\Models\Cart;
 use App\Models\Customer;
+use App\Models\Order;
 use App\Models\Slider;
 use App\Models\Wishlist;
 
@@ -30,6 +31,7 @@ class HomeCotroller{
         $count = Wishlist::where('customer_id', $customerID)->count();
         $count_cart = Cart::where('customer_id',$customerID)->count();
         $total = Cart::where('customer_id', $customerID)->sum('total');
+       
 
         $menus = $this->menuService->getParent(); // Lấy 10 mục mỗi trang
         return view('pages.index', [
@@ -37,6 +39,7 @@ class HomeCotroller{
             'menus' => $menus,
             'sliders' => $sliders,
             'carts' => $this->cartService->getAll(),
+           
             'count' => $count,
             'total' => $total,
             'count_cart' => $count_cart,

@@ -114,52 +114,7 @@ class CartController{
             ]
         ]);
     }
-    public function coupon(Request $request) {
-        $request->validate([
-            'code' => 'required|string|max:255',
-        ]);
-    
-        $voucher = Voucher::where('code', $request->code)->first();
-        
-        if (!$voucher) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Mã giảm giá không hợp lệ.'
-            ]);
-        }
-    
-
-
-        $discountAmount = $voucher->value ?? 0;
-        $type = $voucher->type;
-        $subtotal = $this->cartService->Subtotal();
-        
-        if ($subtotal > 0) {
-            if ($type == 'percentage') {
-                $total = $subtotal - ($subtotal * ($discountAmount / 100));
-            } else {
-                $total = $subtotal - $discountAmount;
-            }
-            $total = max($total, 0);
-        } else {
-            $total = 0;
-        }
-    
-        session([
-            'discount' => $discountAmount,
-            'type' => $type,
-            'total' => $total
-        ]);
-    
-        return response()->json([
-            'success' => true,
-            'discount' => number_format($discountAmount, 2),
-            'subtotal' => number_format($subtotal, 2),
-            'total' => number_format($total, 2),
-            'message' => 'Mã giảm giá đã được áp dụng!'
-        ]);
-    }
-    
+ 
     
     
     

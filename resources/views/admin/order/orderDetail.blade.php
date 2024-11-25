@@ -21,7 +21,6 @@
                         <p><strong>Trạng Thái:</strong>
                         <button type="submit" class="btn btn-danger">  {{ $statusMapping[$order->shipping_status] ?? 'N/A' }}</button>
                     </form></p>
-                    <p><strong>Tổng Tiền:</strong> {{ formatCurrency($order->total_price) }}</p>
                     <p><strong>Ngày Đặt Hàng:</strong> {{ $order->created_at->format('d/m/Y H:i') }}</p>
                 </div>
             </div>
@@ -53,6 +52,24 @@
                     @endforeach
                 </tbody>
             </table>
+
+            <div class="order-summary text-end">
+    <p><span class="label">TỔNG CỘNG:</span> <span class="value">{{ formatCurrency($order->subtotal) }}</span></p>
+    <p>
+        <span class="label">GIẢM GIÁ:</span> 
+        <span class="value">{{ $order->discount }}
+            @if($orderDetails->first()->order->type == 'percentage')
+                %
+            @else
+                VND
+            @endif
+        </span>
+    </p>
+    <p class="total"><span class="label">TỔNG TIỀN:</span> <span class="value">{{ formatCurrency($order->total_price) }}</span></p>
+</div>
+
+
+
         </div>
     </div>
 

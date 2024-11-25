@@ -35,7 +35,7 @@
                                             <a href="#"><img src="{{ asset('storage/uploads/' . $item->thumb) }}" alt="{{ $item->name }}" style="width: 80px; height: auto;"></a>
                                         </td>
 
-                                        <td class="li-product-name">{{ $item->name }}</td>
+                                        <td class="li-product-name"><a href="{{route('details',$item->product_id)}}">{{ $item->name }}</a></td>
                                         <td class="li-product-price" style="color: black;">
                                             {{ formatCurrency($item->price) }}
                                         </td>

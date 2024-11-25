@@ -65,6 +65,7 @@ class CustomerController extends Controller
                 'password' => $request->input('password')])){
 
                 $customerName = Auth::guard('cus')->user()->name;
+                $customerMail = Auth::guard('cus')->user()->email;
                 $customerID = Auth::guard('cus')->user()->id;
                 $countWishlist = $this->customerService->countWishlistById($customerID);
                 
@@ -73,6 +74,8 @@ class CustomerController extends Controller
                 session(['countWishlist' => $countWishlist]);       
                 session(['customerName' => $customerName]);
                 session(['customerID' => $customerID]);
+                session(['customerMail' => $customerMail]);
+
 
                 
         return redirect()->route('index');

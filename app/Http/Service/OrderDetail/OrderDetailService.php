@@ -16,11 +16,18 @@ class OrderDetailService {
     public function getAll()
     {
         $customerID = session('customerID');
-        return  OrderDetail::where('customer_id', $customerID)
-            ->with(['order', 'product']) // Eager load liên kết order và product
+    
+        $orderDetails = OrderDetail::where('customer_id', $customerID)
+            ->with(['order', 'product']) 
             ->orderBy('created_at', 'desc')
-            ->get()
-            ->groupBy('order_id');// Nhóm theo order_id
+            ->paginate(8); // Phân trang 10 bản ghi mỗi trang
+    
+            $groupedOrderDetails = $orderDetails->getCollection()->groupBy('order_id');
+    
+        // Gắn tập hợp đã nhóm lại vào collection
+        $orderDetails->setCollection($groupedOrderDetails);
+    
+        return $orderDetails;
     }
     
     

@@ -13,7 +13,7 @@
                                             <h2>{{$slider->name}}</h2>
                                             <h3>Starting at <span>$1209.00</span></h3>
                                             <div class="default-btn slide-btn">
-                                                <a class="links" href="shop-left-sidebar.html">Shopping Now</a>
+                                                <a class="links" href="{{ route('search', ['query' => $slider->name]) }}">Shopping Now</a>
                                             </div>
                                         </div>
                                     </div>

@@ -53,10 +53,11 @@ Route::prefix('/')->group(function () {
 
       
 
-        Route::post('coupon', [CartController::class, 'coupon'])->name('coupon');
+        Route::post('coupon', [OrderController::class, 'coupon'])->name('coupon');
 
         // Blog Routes
-        Route::get('/blog-details/{productId?}', [BlogController::class, 'details'])->name('blog.details');
+        Route::get('/blog/{productId?}', [BlogController::class, 'index'])->name('blog');
+        Route::get('/blog-details/{productId?}', [BlogController::class, 'detail'])->name('blog.detail');
 
 
         // Checkout Routes
@@ -66,9 +67,10 @@ Route::prefix('/')->group(function () {
             Route::post('/', [OrderController::class, 'index'])->name('order');
             Route::get('/', [OrderController::class, 'index'])->name('order');
 
-            Route::post('/store', [OrderController::class, 'store'])->name('order.add');
-        });
 
+           
+        });
+        Route::post('/store', [OrderController::class, 'store'])->name('order.add');
         Route::get('/order_details/{id}', [OrderDetailController::class, 'index'])->name('order_details');
 
 

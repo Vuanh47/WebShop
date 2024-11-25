@@ -33,7 +33,7 @@ class OrderDetailController{
 
     public function index($id)
     {
-    
+
         $order_details = OrderDetail::where('order_id', $id)->get();
        
         $customerID = session('customerID');

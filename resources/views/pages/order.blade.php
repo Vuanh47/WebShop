@@ -35,8 +35,8 @@
         <ul class="list-group">
             <li class="list-group-item"><strong>Subtotal:</strong> {{ formatCurrency($subtotal) }}</li>
             <li class="list-group-item"><strong>Discount:</strong> 
-                <span id="discountValue">
-                    {{ session('discount') ? number_format(session('discount'), 2, ',', '.') : '0' }} 
+                <span id="displayDiscount">
+                    {{ $discount ? $discount : '0' }} 
                     @if(session('type') == 'percentage')
                         %
                     @else
@@ -44,33 +44,37 @@
                     @endif
                 </span>
             </li>
-            <li class="list-group-item"><strong>Total:</strong> {{ formatCurrency($total) }}</li>
-        </ul>
+            <li class="list-group-item"><strong>Total:</strong> <span id="totalAmount">{{ formatCurrency($total) }}</span></li>
+            </ul>
     </div>
 
     <div class="coupon-accordion">
     <h3>Have a coupon? <span id="showcoupon">Click here to enter your code</span></h3>
         <div id="checkout_coupon" class="coupon-checkout-content">
             <div class="coupon-info">
-                <form action="#">
-                    <p class="checkout-coupon">
-                        <input placeholder="Coupon code" type="text">
-                        <input value="Apply Coupon" type="submit">
-                    </p>
-                </form>
+                    <form action="{{ route('coupon') }}" method="post" id="coupon-form">
+                        @csrf
+                        <div class="coupon">
+                            <input type="hidden" name="subtotal" value="{{ $subtotal }}">
+                            <input id="code" class="input-text" name="code" placeholder="Coupon code" type="text">
+                            <input class="btn btn-dark" name="apply_coupon" value="Apply coupon" type="submit">
+                        </div>
+                    </form>
             </div>
         </div>
     </div>
+    <br>
     <!-- Shipping information form -->
     <div class="customer-info m-4">
-        <h3>Shipping Information</h3>
+        <h3 class="m-3 text-center ">Shipping Information</h3>
         <form action="{{ route('order.add') }}" method="POST">
         @csrf
         
             <!-- Hidden inputs to send total, discount, and subtotal,customer_id -->
-            <input type="hidden" name="total" value="{{ $total }}">
-            <input type="hidden" name="discount" value="{{$discount}}">
-            <input type="hidden" name="subtotal" value="{{ $subtotal }}">
+            <input type="hidden" name="totalValue" value="{{ $total }}">
+            <input type="hidden" name="type" id="type" value="{{$type}}">
+            <input type="hidden" name="discount" id="discountValue" value="{{$discount}}">
+            <input type="hidden" name="subtotal" id="subtotal" value="{{$subtotal}}">
             <input type="hidden" name="customer_id" value="{{ session('customerID') }}">
 
             <div class="form-group row">
@@ -133,4 +137,93 @@
         @include('admin.alert')
     </div>
 </div>
+@endsection
+
+@section('footer')
+<script>
+     document.addEventListener('DOMContentLoaded', function () {
+    // 1. Lấy form mã giảm giá
+    const couponForm = document.querySelector('#coupon-form');
+
+    // 2. Kiểm tra sự tồn tại của form
+    if (couponForm) {
+        // Lắng nghe sự kiện submit
+        couponForm.addEventListener('submit', function (event) {
+            event.preventDefault(); // Ngăn chặn hành vi mặc định
+            applyCoupon(); // Gọi hàm xử lý mã giảm giá
+        });
+    } else {
+        console.error('#coupon-form không tồn tại trong DOM');
+    }
+
+    // 3. Hàm xử lý mã giảm giá
+    function applyCoupon() {
+        const code = document.querySelector('#code').value.trim();
+        const subtotal = document.querySelector('input[name="subtotal"]').value.trim(); // Lấy giá trị subtotal từ input hidden
+
+        if (!code) {
+            alert('Vui lòng nhập mã giảm giá.');
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('code', code);
+        formData.append('subtotal', subtotal); // Thêm subtotal vào formData
+        formData.append('_token', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
+
+        // Gửi yêu cầu đến server
+        fetch("{{ route('coupon') }}", {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json',
+            },
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Thông báo thành công và cập nhật giao diện
+                    alert(`Mã giảm giá đã được áp dụng!\nGiảm giá: ${data.discount}${(data.type === 'percentage' ? '%' : ' VND')}\nTổng tiền: ${data.total}đ`);
+
+               // Cập nhật giá trị giảm giá
+                const discountElement = document.querySelector('#discountValue');
+                if (discountElement) {
+                    discountElement.value = data.discount;  // Cập nhật giá trị của input hidden
+                    //  hiển thị giá trị giảm giá trên giao diện
+                    const displayDiscount = document.querySelector('#displayDiscount');
+                    if (displayDiscount) {
+                        displayDiscount.textContent = data.discount + (data.type === 'percentage' ? '%' : ' VND');
+                    }
+                }
+
+                // Cập nhật giá trị của "type"
+                const typeDiscount = document.querySelector('#type');
+                if (typeDiscount) {
+                    typeDiscount.value = data.type;  // Cập nhật giá trị của input hidden
+                }
+                const totalInput = document.querySelector('input[name="totalValue"]');
+                const totalAmount = document.querySelector('#totalAmount');
+
+                // Kiểm tra nếu cả 2 phần tử đều tồn tại
+                if (totalInput && totalAmount) {
+                    const formattedTotal = data.total.replace(/,/g, '').replace(/\.00$/, '');  // Loại bỏ dấu phẩy và phần thập phân .00
+                    // Cập nhật giá trị trong input ẩn
+                    totalInput.value = formattedTotal;
+                    // Cập nhật tổng tiền hiển thị trên giao diện
+                    totalAmount.textContent = formattedTotal + 'đ';
+                }
+
+                } else {
+                    alert(data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Lỗi khi gửi yêu cầu:', error);
+                alert('Đã có lỗi xảy ra khi áp dụng mã giảm giá.');
+            });
+    }
+});
+
+</script>
+
 @endsection
