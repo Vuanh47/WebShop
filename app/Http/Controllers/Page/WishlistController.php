@@ -6,6 +6,7 @@ use App\Http\Service\Menu\MenuService;
 use App\Http\Service\Wishlist\WishlistService;
 use App\Http\Service\Product\ProductService;
 use App\Models\Cart;
+use App\Models\Customer;
 use App\Models\Product;
 use App\Models\Wishlist;
 use Illuminate\Http\Request;
@@ -38,12 +39,14 @@ class WishlistController{
     }
     public function index(){
         $customerID = session('customerID');
+        $customer = Customer::find($customerID);
         $count = Wishlist::where('customer_id', $customerID)->count();
         $total = Cart::where('customer_id', $customerID)->sum('total');
         $count_cart = cart::where('customer_id',$customerID)->count();
         return view('pages.wishlist',[
             'menus' => $this->menuService->getParent(),
             'title' => 'Wishlist',
+            'customer' => $customer,
             'wishlist' => $this->wishlistService->getAll(),
              'carts' => $this->cartService->getAll(),        
             'count' => $count,

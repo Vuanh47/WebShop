@@ -18,7 +18,7 @@ class OrderPlacedMail extends Mailable
 
     public function build()
     {
-        return $this->view('mail')
+        return $this->view('pages.mail.MailOrder')
                     ->with([
                         'orderDetails' => $this->orderDetails,
                     ]);

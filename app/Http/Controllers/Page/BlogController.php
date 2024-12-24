@@ -9,6 +9,7 @@ use App\Http\Service\Menu\MenuService;
 use App\Http\Service\Product\ProductService;
 use App\Models\Blog;
 use App\Models\Cart;
+use App\Models\Customer;
 use App\Models\Product;
 use App\Models\Wishlist;
 use Illuminate\Http\Request;
@@ -33,6 +34,8 @@ class BlogController{
 
         $products = Product::with(['blogs'])->get();
         $customerID = session('customerID');
+        $customer = Customer::find($customerID);
+
         $count = Wishlist::where('customer_id', $customerID)->count();
         $count_cart = Cart::where('customer_id',$customerID)->count();
         $total = Cart::where('customer_id', $customerID)->sum('total');
@@ -43,6 +46,8 @@ class BlogController{
             'title' => 'Blog',
             'menus' => $this->menuService->getParent(),
             'count' => $count,
+            'customer' => $customer,
+
             'carts' => $this->cartService->getAll(),
             'products' => $products,
             'blogs' => $blogs, 
@@ -57,6 +62,7 @@ class BlogController{
    
         $product = Product::find($id);
         $customerID = session('customerID');
+        $customer = Customer::find($customerID);
         $count = Wishlist::where('customer_id', $customerID)->count();
         $count_cart = Cart::where('customer_id',$customerID)->count();
         $total = Cart::where('customer_id', $customerID)->sum('total');
@@ -68,6 +74,7 @@ class BlogController{
             'count' => $count,
             'carts' => $this->cartService->getAll(),
             'product' => $product,
+            'customer' => $customer,
             'imageUrl' =>'',
             'customer_id' => $customerID,
             'blogs' => $blogs, 
@@ -78,7 +85,7 @@ class BlogController{
     
 
     public function store(CreateFormRequest $request){
-       
+    
         $result = $this->blogService->create($request);
 
         return redirect()->back();

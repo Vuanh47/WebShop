@@ -9,6 +9,7 @@ use App\Http\Service\Product\ProductService;
 use App\Models\Menu;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ProductController extends Controller
 {
@@ -39,6 +40,32 @@ class ProductController extends Controller
         return view('admin.products.list',[
             'title' =>'Danh Sách Sản Phẩm',
             'products' => $this->productService->getAll()    
+        ]);
+    }
+
+    public function search(Request $request)
+    {
+        $products = $this->productService->getAll();
+        
+        $searchTerm = $request->input('query');
+ 
+
+       
+        $products = Product::query();
+        if(!empty($searchTerm)){
+
+            $products = $products->where(function ($query) use ($searchTerm) {
+                $query->where('name', 'LIKE', "%{$searchTerm}%")
+                      ->orWhere('description', 'LIKE', "%{$searchTerm}%");
+            });
+        }
+
+        $products = $products->paginate(10);
+        return view('admin.products.list', [
+            'products' => $products,
+            'searchTerm' => $searchTerm,
+            'title' =>'Danh Sách Sản Phẩm',
+         
         ]);
     }
 
@@ -80,6 +107,30 @@ class ProductController extends Controller
         $product->update($request->all());
         return redirect()->route('product.list')->with('success', 'Menu updated successfully!');
     }
+    public function getProductDetails($id)
+{
+    try {
+        $product = Product::with('blogs')->findOrFail($id);
+
+        return response()->json([
+            'id' => $product->id,
+            'name' => $product->name,
+            'thumb' => $product->thumb,
+            'price_sale' => formatCurrency($product->price_sale),
+            'price' => formatCurrency($product->price),
+
+            'description' => $product->description,
+            'content' => $product->content,
+            'quantity' =>$product->quantity,
+            'rating' => $product->blogs->avg('star') ?? 0,
+        ]);
+    } catch (\Exception $e) {
+        Log::error($e->getMessage());
+
+        return response()->json(['error' => 'Failed to fetch product details'], 500);
+    }
+}
+
 
 }
 

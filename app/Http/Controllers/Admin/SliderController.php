@@ -22,7 +22,7 @@ class SliderController extends Controller{
     
     public function store(CreateFormRequest $request){
         $result =$this->sliderService->creat($request);
-        return redirect()->back();
+        return redirect()->route('slider.list');
         
     }
 

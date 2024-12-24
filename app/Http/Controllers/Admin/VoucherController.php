@@ -30,7 +30,7 @@ class VoucherController extends Controller{
     public function store(CreateFormRequest $request){
        $result = $this->voucher->creat($request);
 
-       return redirect()->back();
+       return redirect()->route('voucher.list')->with('success', 'Voucher updated successfully!');
     }
 
     public function index(){

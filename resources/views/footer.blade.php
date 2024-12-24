@@ -22,7 +22,7 @@
                             </li>
                             <li>
                                 <span>Email: </span>
-                                <a href="mailto://info@yourdomain.com">info@yourdomain.com</a>
+                                <a href="">info@yourdomain.com</a>
                             </li>
                         </ul>
                     </div>
@@ -95,9 +95,9 @@
                             <h4>Sign up to newsletter</h4>
                             <form action="#" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="footer-subscribe-form validate" target="_blank" novalidate>
                                 <div id="mc_embed_signup_scroll">
-                                    <div id="mc-form" class="mc-form subscribe-form form-group" >
-                                    <input id="mc-email" type="email" autocomplete="off" placeholder="Enter your email" />
-                                    <button  class="btn" id="mc-submit">Subscribe</button>
+                                    <div id="mc-form" class="mc-form subscribe-form form-group">
+                                        <input id="mc-email" type="email" autocomplete="off" placeholder="Enter your email" />
+                                        <button class="btn" id="mc-submit">Subscribe</button>
                                     </div>
                                 </div>
                             </form>
@@ -109,47 +109,51 @@
             </div>
         </div>
     </div>
-   
+
 </div>
-  <script src="{{asset('user/js/vendor/jquery-1.12.4.min.js')}}"></script>
-        <!-- Popper js -->
-        <script src="{{asset('user/js/vendor/popper.min.js')}}"></script>
-        <!-- Bootstrap V4.1.3 Fremwork js -->
-        <script src="{{asset('user/js/bootstrap.min.js')}}"></script>
-        <!-- Ajax Mail js -->
-        <script src="{{asset('user/js/ajax-mail.js')}}"></script>
-        <!-- Meanmenu js -->
-        <script src="{{asset('user/js/jquery.meanmenu.min.js')}}"></script>
-        <!-- Wow.min js -->
-        <script src="{{asset('user/js/wow.min.js')}}"></script>
-        <!-- Slick Carousel js -->
-        <script src="{{asset('user/js/slick.min.js')}}"></script>
-        <!-- Owl Carousel-2 js -->
-        <script src="{{asset('user/js/owl.carousel.min.js')}}"></script>
-        <!-- Magnific popup js -->
-        <script src="{{asset('user/js/jquery.magnific-popup.min.js')}}"></script>
-        <!-- Isotope js -->
-        <script src="{{asset('user/js/isotope.pkgd.min.js')}}"></script>
-        <!-- Imagesloaded js -->
-        <script src="{{asset('user/js/imagesloaded.pkgd.min.js')}}"></script>
-        <!-- Mixitup js -->
-        <script src="{{asset('user/js/jquery.mixitup.min.js')}}"></script>
-        <!-- Countdown -->
-        <script src="{{asset('user/js/jquery.countdown.min.js')}}"></script>
-        <!-- Counterup -->
-        <script src="{{asset('user/js/jquery.counterup.min.js')}}"></script>
-        <!-- Waypoints -->
-        <script src="{{asset('user/js/waypoints.min.js')}}"></script>
-        <!-- Barrating -->
-        <script src="{{asset('user/js/jquery.barrating.min.js')}}"></script>
-        <!-- Jquery-ui -->
-        <script src="{{asset('user/js/jquery-ui.min.js')}}"></script>
-        <!-- Venobox -->
-        <script src="{{asset('user/js/venobox.min.js')}}"></script>
-        <!-- Nice Select js -->
-        <script src="{{asset('user/js/jquery.nice-select.min.js')}}"></script>
-        <!-- ScrollUp js -->
-        <script src="{{asset('user/js/scrollUp.min.js')}}"></script>
-        <!-- Main/Activator js -->
-        <script src="{{asset('user/js/main.js')}}"></script>
+<script src="{{asset('user/js/vendor/jquery-1.12.4.min.js')}}"></script>
+<!-- Popper js -->
+<script src="{{asset('user/js/vendor/popper.min.js')}}"></script>
+<!-- Bootstrap V4.1.3 Fremwork js -->
+<script src="{{asset('user/js/bootstrap.min.js')}}"></script>
+<!-- Ajax Mail js -->
+<script src="{{asset('user/js/ajax-mail.js')}}"></script>
+<!-- Meanmenu js -->
+<script src="{{asset('user/js/jquery.meanmenu.min.js')}}"></script>
+<!-- Wow.min js -->
+<script src="{{asset('user/js/wow.min.js')}}"></script>
+<!-- Slick Carousel js -->
+<script src="{{asset('user/js/slick.min.js')}}"></script>
+<!-- Owl Carousel-2 js -->
+<script src="{{asset('user/js/owl.carousel.min.js')}}"></script>
+<!-- Magnific popup js -->
+<script src="{{asset('user/js/jquery.magnific-popup.min.js')}}"></script>
+<!-- Isotope js -->
+<script src="{{asset('user/js/isotope.pkgd.min.js')}}"></script>
+<!-- Imagesloaded js -->
+<script src="{{asset('user/js/imagesloaded.pkgd.min.js')}}"></script>
+<!-- Mixitup js -->
+<script src="{{asset('user/js/jquery.mixitup.min.js')}}"></script>
+<!-- Countdown -->
+<script src="{{asset('user/js/jquery.countdown.min.js')}}"></script>
+<!-- Counterup -->
+<script src="{{asset('user/js/jquery.counterup.min.js')}}"></script>
+<!-- Waypoints -->
+<script src="{{asset('user/js/waypoints.min.js')}}"></script>
+<!-- Barrating -->
+<script src="{{asset('user/js/jquery.barrating.min.js')}}"></script>
+<!-- Jquery-ui -->
+<script src="{{asset('user/js/jquery-ui.min.js')}}"></script>
+<!-- Venobox -->
+<script src="{{asset('user/js/venobox.min.js')}}"></script>
+<!-- Nice Select js -->
+<script src="{{asset('user/js/jquery.nice-select.min.js')}}"></script>
+<!-- ScrollUp js -->
+<script src="{{asset('user/js/scrollUp.min.js')}}"></script>
+<!-- Main/Activator js -->
+<script src="{{asset('user/js/main.js')}}"></script>
+
+<script src="{{asset('user/js/bootstrap.bundle.min.js')}}"></script>
+
+<script src="{{asset('user/js/all.min.js')}}"></script>
 @yield('footer')

@@ -15213,5 +15213,62 @@ html.maximized-card {
   border-top: 1px solid #ddd; /* Đường gạch ngang phía trên */
   padding-top: 10px;
 }
+/* Container căn giữa form */
+.search-bar {
+  max-width: 500px; /* Giới hạn chiều rộng form */
+  margin: auto;     /* Căn giữa theo chiều ngang */
+}
+
+/* Input */
+.search-bar .form-control {
+  height: 45px;                /* Tăng chiều cao */
+  font-size: 1rem;             /* Kích thước chữ lớn hơn */
+  border-right: none;          /* Loại bỏ đường viền bên phải */
+}
+
+/* Button */
+.search-bar .btn-primary {
+  height: 45px;                /* Cùng chiều cao với input */
+  font-size: 1rem;             /* Kích thước chữ lớn hơn */
+  background-color: #007bff;   /* Xanh đậm */
+  border: none;                /* Loại bỏ đường viền */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Button hover */
+.search-bar .btn-primary:hover {
+  background-color: #0056b3;   /* Màu đậm hơn khi hover */
+}
+
+/* Icon */
+.search-bar .btn-primary i {
+  margin-left: 0;              /* Không thụt lề */
+  font-size: 1.2rem;           /* Kích thước lớn hơn */
+}
+
+/* Viền bo tròn */
+.search-bar .rounded-start {
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+}
+
+.search-bar .rounded-end {
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+}
+/* Nút Logout với chiều cao ngắn hơn */
+.btn-warning {
+  border-radius: 10px; /* Bo tròn ít hơn */
+  padding: 0;   /* Giảm padding để giảm chiều cao */
+  font-size: 0.9rem;    /* Giảm kích thước chữ một chút */
+  transition: background-color 0.3s ease;
+}
+
+/* Hover hiệu ứng */
+.btn-warning:hover {
+  background-color: #ffae42; /* Màu sáng hơn khi hover */
+}
 
 /*# sourceMappingURL=adminlte.css.map */

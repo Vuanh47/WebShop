@@ -6,77 +6,80 @@ use App\Http\Service\Cart\CartService;
 use App\Http\Service\Menu\MenuService;
 use App\Http\Service\Product\ProductService;
 use App\Models\Cart;
+use App\Models\Customer;
 use App\Models\Product;
 use App\Models\Wishlist;
 use Illuminate\Http\Request;
 
-class ShopController{
+class ShopController
+{
     protected $menuService;
     protected $productService;
     protected $cartService;
 
 
-    public function __construct(MenuService $menuService,ProductService $productService,CartService $cartService){
+    public function __construct(MenuService $menuService, ProductService $productService, CartService $cartService)
+    {
         $this->menuService = $menuService;
         $this->productService = $productService;
         $this->cartService = $cartService;
-
-
     }
     public function index()
     {
         $products = $this->productService->getAll();
         $customerID = session('customerID');
+        $customer = Customer::find($customerID);
         $count = Wishlist::where('customer_id', $customerID)->count();
         $total = Cart::where('customer_id', $customerID)->sum('total');
-        $count_cart = cart::where('customer_id',$customerID)->count();
+        $count_cart = cart::where('customer_id', $customerID)->count();
         return view('pages.shop', [
             'title' => 'Shop',
             'menus' => $this->menuService->getParent(),
-            'carts' => $this->cartService->getAll(),           
+            'carts' => $this->cartService->getAll(),
             'products' => $products,
+            'customer' => $customer,
             'count' => $count,
             'total' => $total,
             'count_cart' => $count_cart,
         ]);
     }
-    
+
     public function search(Request $request)
     {
         $products = $this->productService->getAll();
         $customerID = session('customerID');
+        $customer = Customer::find($customerID);
         $count = Wishlist::where('customer_id', $customerID)->count();
         $total = Cart::where('customer_id', $customerID)->sum('total');
-        $count_cart = cart::where('customer_id',$customerID)->count();
+        $count_cart = cart::where('customer_id', $customerID)->count();
         $searchTerm = $request->input('query');
         $searchMenu_id  = $request->input('menu_id');
 
-       
+
         $products = Product::query();
-        if(!empty($searchTerm)){
+        if (!empty($searchTerm)) {
 
             $products = $products->where(function ($query) use ($searchTerm) {
                 $query->where('name', 'LIKE', "%{$searchTerm}%")
-                      ->orWhere('description', 'LIKE', "%{$searchTerm}%");
+                    ->orWhere('description', 'LIKE', "%{$searchTerm}%");
             });
         }
 
         if (!empty($searchMenu_id)) {
             $products = $products->where('menu_id', $searchMenu_id);
         }
-    
+
         $products = $products->paginate(10);
         return view('pages.shop', [
             'products' => $products,
             'searchTerm' => $searchTerm,
             'carts' => $this->cartService->getAll(),
+            'customer' => $customer,
             'title' => 'Shop',
-            'menus' => $this->menuService->getParent(), 
+            'menus' => $this->menuService->getParent(),
             'count' => $count,
             'total' => $total,
             'count_cart' => $count_cart,
         ]);
     }
-    
-
 }

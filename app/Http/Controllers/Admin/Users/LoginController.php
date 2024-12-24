@@ -23,8 +23,15 @@ class LoginController extends Controller
         if(Auth::attempt([
                 'email' => $request->input('email'),
                 'password' => $request->input('password')])){
-
-            return redirect()->route('admin');
+                
+                $user = Auth::user(); 
+                session([
+                   
+                    'user_name' => $user->name,
+                  
+                   
+                ]);
+            return redirect()->route('admin',['user' =>$user]);
         }
 
         return redirect()->back()->withErrors(['login' => 'Login failed.']);

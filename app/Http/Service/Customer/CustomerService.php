@@ -31,7 +31,7 @@ class CustomerService{
             }
     
             // Tạo tài khoản mới
-            Customer::create([
+           $customer= Customer::create([
                 'name' => (string) $request->input('name'),
                 'email' => (string) $request->input('email'),
                 'password' => Hash::make($request->input('password')), // Hash mật khẩu
@@ -45,7 +45,7 @@ class CustomerService{
             Session::flash('error', $err->getMessage());
             return false;
         }
-        return true;
+        return $customer;
     }
     public function countWishlistById($customerID)
     {

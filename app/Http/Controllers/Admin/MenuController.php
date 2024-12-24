@@ -28,7 +28,7 @@ class MenuController extends Controller
     public function store(CreateFormRequest $request){
        $result = $this->menuService->creat($request);
 
-       return redirect()->back();
+       return redirect()->route('menu.list')->with('success', 'Menu updated successfully!');
     }
 
     public function index(){

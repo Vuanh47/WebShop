@@ -21,52 +21,52 @@
                         </thead>
                         <tbody>
                             @if($carts->isEmpty())
-                                <tr>
-                                    <td colspan="7" class="text-center">Không có sản phẩm trong giỏ hàng</td>
-                                </tr>
+                            <tr>
+                                <td colspan="7" class="text-center">Không có sản phẩm trong giỏ hàng</td>
+                            </tr>
                             @else
-                                @foreach ($carts as $cart)
-                                    <tr data-customer-id="{{ $cart->customer_id }}" data-cart-id="{{ $cart->id }}" data-product-id="{{ $cart->product_id}}">
-                                        
-                                        <td>
-                                            <form action="{{ route('cart.delete', $cart->id) }}" method="POST" style="display: inline;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="li-product-remove" style="border: none; background: none; cursor: pointer;">
-                                                    <i class="fa fa-times"></i>
-                                                </button>
-                                            </form>
-                                        </td>
-                                        <td class="li-product-thumbnail">
-                                            <a href="#"><img src="/storage/uploads/{{$cart->thumb}}" data-thumb="{{ $cart->thumb }}" alt=""></a>
-                                        </td>
-                                        <td class="li-product-name"><a href="{{route('details',$cart->product_id)}}">{{ $cart->name }}</a></td>
-                                        <td class="li-product-price">
-                                            <span class="amount">{{ number_format($cart->price, 0, ',', '.') }}</span>
-                                        </td>
-                                        <td class="quantity">
-                                            <label>Quantity</label>
-                                            <div class="cart-plus-minus">
-                                                <input class="cart-plus-minus-box" value="{{ $cart->quantity }}" type="text">
-                                            </div>
-                                        </td>
-                                        <td class="product-subtotal">
-                                            <span class="amount">{{ number_format($cart->total, 0, ',', '.') }}</span>
-                                        </td>
-                                        <td class="li-product-confirm">
-                                            <input type="checkbox" name="confirm[]" value="{{ $cart->id }}" style="transform: scale(0.4);" class="cart-item-checkbox" data-total="{{ $cart->total }}">
-                                        </td>
-                                    </tr>
-                                @endforeach
+                            @foreach ($carts as $cart)
+                            <tr data-customer-id="{{ $cart->customer_id }}" data-cart-id="{{ $cart->id }}" data-product-id="{{ $cart->product_id}}">
+
+                                <td>
+                                    <form action="{{ route('cart.delete', $cart->id) }}" method="POST" style="display: inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="li-product-remove" style="border: none; background: none; cursor: pointer;">
+                                            <i class="fa fa-times"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                                <td class="li-product-thumbnail">
+                                    <a href="#"><img src="/storage/uploads/{{$cart->thumb}}" data-thumb="{{ $cart->thumb }}" alt=""></a>
+                                </td>
+                                <td class="li-product-name"><a href="{{route('details',$cart->product_id)}}">{{ $cart->name }}</a></td>
+                                <td class="li-product-price">
+                                    <span class="amount">{{ number_format($cart->price, 0, ',', '.') }}</span>
+                                </td>
+                                <td class="quantity">
+                                    <label>Quantity</label>
+                                    <div class="cart-plus-minus">
+                                        <input class="cart-plus-minus-box" value="{{ $cart->quantity }}" type="text">
+                                    </div>
+                                </td>
+                                <td class="product-subtotal">
+                                    <span class="amount">{{ number_format($cart->total, 0, ',', '.') }}</span>
+                                </td>
+                                <td class="li-product-confirm">
+                                    <input type="checkbox" name="confirm[]" value="{{ $cart->id }}" style="transform: scale(0.4);" class="cart-item-checkbox" data-total="{{ $cart->total }}">
+                                </td>
+                            </tr>
+                            @endforeach
                             @endif
                         </tbody>
                     </table>
                 </div>
-                
+
                 <div class="row mb-30">
                     <div class="col-12">
                         <div class="coupon-all">
-                           
+
                             <div class="coupon2">
                                 <button class="btn btn-dark" id="update-cart-btn" type="button">Update cart</button>
                             </div>
@@ -74,34 +74,34 @@
                     </div>
                 </div>
 
-                
+
                 <div class="row">
                     <div class="col-md-5 ml-auto">
-                    <form action="{{ route('order') }}" method="post">
-                        @csrf
-                        <div class="cart-page-total">
-                            <h2>Cart Totals</h2>
-                            <ul>
-                                <li>Subtotal <span id="subtotal">{{ formatCurrency($subtotal) }}</span></li>
-                                <li>Discount 
-                                    <span id="discountValue">
-                                        {{ number_format($discount, 2) }} 
-                                        @if($type == 'percentage')
-                                            % 
-                                        @else
+                        <form action="{{ route('order') }}" method="post">
+                            @csrf
+                            <div class="cart-page-total">
+                                <h2>Cart Totals</h2>
+                                <ul>
+                                    <li>Subtotal <span id="subtotal">{{ formatCurrency($subtotal) }}</span></li>
+                                    <li>Discount
+                                        <span id="discountValue">
+                                            {{ number_format($discount, 2) }}
+                                            @if($type == 'percentage')
+                                            %
+                                            @else
                                             VNĐ
-                                        @endif
-                                    </span>
-                                </li>
-                                <li>Total <span id="totalValue">{{ number_format($total_cart, 0, ',', '.') }}</span></li>
-                            </ul>
-                        </div>
-                        <input type="hidden" value="{{$subtotal}}" name="subtotal" id="subtotal">
-                        <input type="hidden" value="{{$discount}}" name="discount" id="discountValue">
-                        <input type="hidden" value="{{$total_cart}}" name="total" id="totalValue">
-                        <input type="hidden" name="selectedIds" id="selectedIds" nam="selectedIds">
-                        <button type="submit" class="btn btn-dark mt-4">Proceed to checkout</button>
-                    </form>
+                                            @endif
+                                        </span>
+                                    </li>
+                                    <li>Total <span id="totalValue">{{ number_format($total_cart, 0, ',', '.') }}</span></li>
+                                </ul>
+                            </div>
+                            <input type="hidden" value="{{$subtotal}}" name="subtotal" id="subtotal">
+                            <input type="hidden" value="{{$discount}}" name="discount" id="discountValue">
+                            <input type="hidden" value="{{$total_cart}}" name="total" id="totalValue">
+                            <input type="hidden" name="selectedIds" id="selectedIds" nam="selectedIds">
+                            <button type="submit" class="btn btn-dark mt-4">Proceed to checkout</button>
+                        </form>
 
                     </div>
                 </div>
@@ -114,11 +114,11 @@
 
 @section('footer')
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
         // 1. Xử lý sự kiện liên quan đến nút cập nhật giỏ hàng
         const updateButton = document.querySelector('#update-cart-btn');
         if (updateButton) {
-            updateButton.addEventListener('click', function () {
+            updateButton.addEventListener('click', function() {
                 updateCart();
                 console.log('Đã Click cập nhật')
             });
@@ -134,13 +134,13 @@
             const decButton = row.querySelector('.dec.qtybutton');
 
             if (incButton) {
-                incButton.addEventListener('click', function () {
+                incButton.addEventListener('click', function() {
                     updateQuantity(input, 1);
                 });
             }
 
             if (decButton) {
-                decButton.addEventListener('click', function () {
+                decButton.addEventListener('click', function() {
                     updateQuantity(input, -1);
                 });
             }
@@ -154,7 +154,7 @@
         // 4. Xử lý form mã giảm giá
         const couponForm = document.querySelector('#coupon-form');
         if (couponForm) {
-            couponForm.addEventListener('submit', function (event) {
+            couponForm.addEventListener('submit', function(event) {
                 event.preventDefault();
                 applyCoupon();
             });
@@ -202,7 +202,7 @@
         }
 
         function updateSummary(subtotal, idCartList, idProductList) {
-            console.log('Subtotal:' ,subtotal)
+            console.log('Subtotal:', subtotal)
             const subtotalDisplay = document.querySelector('#subtotal');
             const discountValue = parseFloat(document.querySelector('#discountValue').textContent.replace(/[^\d]/g, '')) || 0;
             const total = subtotal - discountValue;
@@ -214,7 +214,7 @@
             document.querySelector('input[name="total"]').value = total;
             document.querySelector('input[name="selectedIds"]').value = idCartList.join(',');
 
-           // Lưu danh sách vào cookie dưới dạng chuỗi JSON
+            // Lưu danh sách vào cookie dưới dạng chuỗi JSON
             console.log("Các id_cart đã chọn:", idCartList);
 
             // Chuyển danh sách idProductList thành chuỗi JSON và lưu vào cookie
@@ -227,7 +227,7 @@
                 // Duyệt qua tất cả các cookie và tìm cookie có tên khớp
                 for (let i = 0; i < cookieArr.length; i++) {
                     let cookie = cookieArr[i].trim();
-                    
+
                     // Kiểm tra nếu cookie bắt đầu với tên mình cần tìm
                     if (cookie.startsWith(name + "=")) {
                         return decodeURIComponent(cookie.substring(name.length + 1));
@@ -243,62 +243,62 @@
         }
 
         function updateCart() {
-        const cartRows = document.querySelectorAll('tbody tr');
+            const cartRows = document.querySelectorAll('tbody tr');
 
-        cartRows.forEach((row, index) => {
-            const checkbox = row.querySelector('.cart-item-checkbox');
+            cartRows.forEach((row, index) => {
+                const checkbox = row.querySelector('.cart-item-checkbox');
 
-            if (!checkbox) {
-                console.log(`Không tìm thấy checkbox ở dòng ${index + 1}`);
-                return; // Bỏ qua nếu không có checkbox.
-            }
+                if (!checkbox) {
+                    console.log(`Không tìm thấy checkbox ở dòng ${index + 1}`);
+                    return; // Bỏ qua nếu không có checkbox.
+                }
 
-            if (checkbox.checked) {
-                console.log(`Checkbox dòng ${index + 1} được chọn`);
+                if (checkbox.checked) {
+                    console.log(`Checkbox dòng ${index + 1} được chọn`);
 
-                const customerId = row.getAttribute('data-customer-id');
-                const productId = row.getAttribute('data-product-id');
-                const thumb = row.querySelector('.li-product-thumbnail img')?.src || '';
-                const name = row.querySelector('.li-product-name a')?.textContent.trim() || '';
-                const quantity = parseInt(row.querySelector('.cart-plus-minus-box').value) || 0;
-                const price = parseFloat(row.querySelector('.li-product-price .amount').textContent.replace(/\./g, '')) || 0;
-                const total = price * quantity;
+                    const customerId = row.getAttribute('data-customer-id');
+                    const productId = row.getAttribute('data-product-id');
+                    const thumb = row.querySelector('.li-product-thumbnail img')?.src || '';
+                    const name = row.querySelector('.li-product-name a')?.textContent.trim() || '';
+                    const quantity = parseInt(row.querySelector('.cart-plus-minus-box').value) || 0;
+                    const price = parseFloat(row.querySelector('.li-product-price .amount').textContent.replace(/\./g, '')) || 0;
+                    const total = price * quantity;
 
-                const updateUrl = `/cart/update/${productId}`;
+                    const updateUrl = `/cart/update/${productId}`;
 
-                const formData = new URLSearchParams();
-                formData.append('customer_id', customerId);
-                formData.append('product_id', productId);
-                formData.append('thumb', thumb);
-                formData.append('name', name);
-                formData.append('price', price);
-                formData.append('quantity', quantity);
-                formData.append('total', total);
+                    const formData = new URLSearchParams();
+                    formData.append('customer_id', customerId);
+                    formData.append('product_id', productId);
+                    formData.append('thumb', thumb);
+                    formData.append('name', name);
+                    formData.append('price', price);
+                    formData.append('quantity', quantity);
+                    formData.append('total', total);
 
-                fetch(updateUrl, {
-                    method: 'POST',
-                    headers: {
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    },
-                    body: formData.toString()
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            console.log(`Cập nhật thành công sản phẩm ID: ${productId}`);
-                        } else {
-                            console.error(`Cập nhật thất bại cho sản phẩm ID: ${productId}`);
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Lỗi khi gửi yêu cầu:', error);
-                    });
-            } else {
-                console.log(`Checkbox dòng ${index + 1} chưa được chọn`);
-            }
-        });
-    }
+                    fetch(updateUrl, {
+                            method: 'POST',
+                            headers: {
+                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                                'Content-Type': 'application/x-www-form-urlencoded'
+                            },
+                            body: formData.toString()
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                console.log(`Cập nhật thành công sản phẩm ID: ${productId}`);
+                            } else {
+                                console.error(`Cập nhật thất bại cho sản phẩm ID: ${productId}`);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Lỗi khi gửi yêu cầu:', error);
+                        });
+                } else {
+                    console.log(`Checkbox dòng ${index + 1} chưa được chọn`);
+                }
+            });
+        }
 
         function applyCoupon() {
             const code = document.querySelector('#code').value.trim();
@@ -312,17 +312,17 @@
             formData.append('_token', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
 
             fetch("{{ route('coupon') }}", {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            })
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                })
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
                         alert('Mã giảm giá đã được áp dụng!,data.subtotal' + data.total);
-                
+
                         document.querySelector('#discountValue').textContent = data.discount;
                     } else {
                         alert(data.message);
