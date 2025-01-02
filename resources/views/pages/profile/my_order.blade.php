@@ -3,7 +3,7 @@
 @section('content_profile')
 <div class="container m-2">
 
-
+  @include('admin.alert')
   @foreach ($orders as $orderID => $orderDetails)
   <div class="product-card" style="width: 800px; height: auto; margin-bottom: 15px; border: 1px solid #ddd; padding: 20px; border-radius: 10px; background-color: #f9f9f9;">
     <div class="product-header d-flex justify-content-between align-items-center mb-3">

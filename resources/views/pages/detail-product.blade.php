@@ -14,40 +14,9 @@
                                 <img src="{{ asset('storage/uploads/' . $product->thumb) }}" alt="Li's Product Image">
                             </a>
                         </div>
-                        <div class="lg-image">
-                            <a class="popup-img venobox vbox-item" href="{{asset('user/images/product/large-size/2.jpg')}}" data-gall="myGallery">
-                                <img src="{{asset('user/images/product/large-size/2.jpg')}}" alt="product image">
-                            </a>
-                        </div>
-                        <div class="lg-image">
-                            <a class="popup-img venobox vbox-item" href="{{asset('user/images/product/large-size/3.jpg')}}" data-gall="myGallery">
-                                <img src="{{asset('user/images/product/large-size/3.jpg')}}" alt="product image">
-                            </a>
-                        </div>
-                        <div class="lg-image">
-                            <a class="popup-img venobox vbox-item" href="{{asset('user/images/product/large-size/4.jpg')}}" data-gall="myGallery">
-                                <img src="{{asset('user/images/product/large-size/4.jpg')}}" alt="product image">
-                            </a>
-                        </div>
-                        <div class="lg-image">
-                            <a class="popup-img venobox vbox-item" href="{{asset('user/images/product/large-size/5.jpg')}}" data-gall="myGallery">
-                                <img src="{{asset('user/images/product/large-size/5.jpg')}}" alt="product image">
-                            </a>
-                        </div>
-                        <div class="lg-image">
-                            <a class="popup-img venobox vbox-item" href="{{asset('user/images/product/large-size/6.jpg')}}" data-gall="myGallery">
-                                <img src="{{asset('user/images/product/large-size/6.jpg')}}" alt="product image">
-                            </a>
-                        </div>
+                       
                     </div>
-                    <div class="product-details-thumbs slider-thumbs-1">
-                        <div class="sm-image"><img src="{{ asset('storage/uploads/' . $product->thumb) }}" alt="product image thumb"></div>
-                        <div class="sm-image"><img src="{{asset('user/images/product/small-size/2.jpg')}}" alt="product image thumb"></div>
-                        <div class="sm-image"><img src="{{asset('user/images/product/small-size/3.jpg')}}" alt="product image thumb"></div>
-                        <div class="sm-image"><img src="{{asset('user/images/product/small-size/4.jpg')}}" alt="product image thumb"></div>
-                        <div class="sm-image"><img src="{{asset('user/images/product/small-size/5.jpg')}}" alt="product image thumb"></div>
-                        <div class="sm-image"><img src="{{asset('user/images/product/small-size/6.jpg')}}" alt="product image thumb"></div>
-                    </div>
+                  
                 </div>
                 <!--// Product Details Left -->
             </div>
@@ -233,7 +202,7 @@
                                         </label>
 
                                         <input type="hidden" name="thumb" id="thumb">
-                                        <input type="hidden" name="customer_id" value="{{$customer->id}}">
+                                        <input type="hidden" name="customer_id" value="{{$customer_id}}">
                                         <input type="hidden" name="product_id" value="{{$product->id}}">
 
 
@@ -473,9 +442,9 @@
                                                             @if ($rating>= $i)
                                                             <i class="fa fa-star text-warning"></i>
                                                             @elseif ($rating >= $i - 0.5)
-                                                            <i class="fa fa-star-half-o text-warning"></i>
+                                                            <i class="fa fa-star-half text-warning"></i>
                                                             @else
-                                                            <i class="fa fa-star-o text-muted"></i>
+                                                            <i class="fa fa-star text-muted"></i>
                                                             @endif
                                                             @endfor
                                                     </ul>

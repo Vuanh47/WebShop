@@ -32,9 +32,13 @@ class DetailsController
     {
         $customerID = session('customerID');
         $customer = Customer::find($customerID);
+
+        if (!$customerID) {
+            $customerID = ''; // Nếu không tìm thấy khách hàng,
+        }
+
         $product = Product::find($id);
-        $customer_id = session('customerID');
-        $count = Wishlist::where('customer_id', $customer_id)->count();
+        $count = Wishlist::where('customer_id', $customerID)->count();
         $count_cart = Cart::where('customer_id', $customerID)->count();
         $total = Cart::where('customer_id', $customerID)->sum('total');
         $blogs = $this->blogService->getAll($id);
@@ -62,7 +66,7 @@ class DetailsController
             'productsRelated' => $productsRelated,
             'customer' => $customer,
             'imageUrl' => '',
-            'customer_id' => $customer_id,
+            'customer_id' => $customerID,
             'count' => $count,
             'total' => $total,
             'count_cart' => $count_cart,

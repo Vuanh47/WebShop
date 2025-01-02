@@ -78,7 +78,7 @@
                                     <form action="{{ route('wishlist.store', $product->id) }}" method="POST" style="display: inline;">
                                         @csrf
                                         <button type="submit" style="background: none; border: none; padding: 0; cursor: pointer;">
-                                            <i class="fa fa-heart-o"></i>
+                                            <i class="fa fa-heart"></i>
                                         </button>
                                     </form>
                                 </li>

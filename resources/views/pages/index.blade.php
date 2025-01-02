@@ -131,7 +131,7 @@
                         <div class="col-lg-12">
                             <div class="single-product-wrap">
                                 <div class="product-image">
-                                    <a href="single-product.html">
+                                    <a href="{{ route('details', $item->product->id) }}">
                                         <img src="{{ asset('storage/uploads/' . $item->product->thumb) }}" alt="{{ $item->product->name }}">
                                     </a>
                                     <span class="sticker">Hot</span>
@@ -180,7 +180,14 @@
                                     </div>
                                     <div class="add-actions">
                                         <ul class="add-actions-link">
-                                            <li class="add-cart active"><a href="#">Add to cart</a></li>
+                                            <li class="add-cart active">
+                                                <form action="{{ route('cart.add', $item->product->id) }}" method="POST" style="display: inline;">
+                                                    @csrf
+                                                    <button type="submit" style="background: none; border: none; padding: 0; cursor: pointer;">
+                                                        ADD TO CART
+                                                    </button>
+                                                </form>
+                                            </li>
                                             <li><a class="links-details" href="single-product.html"><i class="fa fa-heart"></i></a></li>
                                             <li>
                                                 <a class="quick-view" data-toggle="modal" data-target="#exampleModalCenter"
@@ -257,7 +264,7 @@
                                     <div class="add-actions">
                                         <ul class="add-actions-link">
                                             <li class="add-cart active"><a href="#">Add to cart</a></li>
-                                            <li><a class="links-details" href="single-product.html"><i class="fa fa-heart-o"></i></a></li>
+                                            <li><a class="links-details" href="single-product.html"><i class="fa fa-heart"></i></a></li>
                                             <li><a class="quick-view" data-toggle="modal" data-target="#exampleModalCenter" href="#"><i class="fa fa-eye"></i></a></li>
                                         </ul>
                                     </div>
@@ -300,7 +307,7 @@
                                     <div class="add-actions">
                                         <ul class="add-actions-link">
                                             <li class="add-cart active"><a href="#">Add to cart</a></li>
-                                            <li><a class="links-details" href="single-product.html"><i class="fa fa-heart-o"></i></a></li>
+                                            <li><a class="links-details" href="single-product.html"><i class="fa fa-heart"></i></a></li>
                                             <li><a class="quick-view" data-toggle="modal" data-target="#exampleModalCenter" href="#"><i class="fa fa-eye"></i></a></li>
                                         </ul>
                                     </div>
@@ -341,7 +348,7 @@
                                     <div class="add-actions">
                                         <ul class="add-actions-link">
                                             <li class="add-cart active"><a href="#">Add to cart</a></li>
-                                            <li><a class="links-details" href="single-product.html"><i class="fa fa-heart-o"></i></a></li>
+                                            <li><a class="links-details" href="single-product.html"><i class="fa fa-heart"></i></a></li>
                                             <li><a class="quick-view" data-toggle="modal" data-target="#exampleModalCenter" href="#"><i class="fa fa-eye"></i></a></li>
                                         </ul>
                                     </div>
@@ -384,7 +391,7 @@
                                     <div class="add-actions">
                                         <ul class="add-actions-link">
                                             <li class="add-cart active"><a href="#">Add to cart</a></li>
-                                            <li><a class="links-details" href="single-product.html"><i class="fa fa-heart-o"></i></a></li>
+                                            <li><a class="links-details" href="single-product.html"><i class="fa fa-heart"></i></a></li>
                                             <li><a class="quick-view" data-toggle="modal" data-target="#exampleModalCenter" href="#"><i class="fa fa-eye"></i></a></li>
                                         </ul>
                                     </div>
@@ -425,7 +432,7 @@
                                     <div class="add-actions">
                                         <ul class="add-actions-link">
                                             <li class="add-cart active"><a href="#">Add to cart</a></li>
-                                            <li><a class="links-details" href="single-product.html"><i class="fa fa-heart-o"></i></a></li>
+                                            <li><a class="links-details" href="single-product.html"><i class="fa fa-heart"></i></a></li>
                                             <li><a class="quick-view" data-toggle="modal" data-target="#exampleModalCenter" href="#"><i class="fa fa-eye"></i></a></li>
                                         </ul>
                                     </div>
@@ -468,7 +475,7 @@
                                     <div class="add-actions">
                                         <ul class="add-actions-link">
                                             <li class="add-cart active"><a href="#">Add to cart</a></li>
-                                            <li><a class="links-details" href="single-product.html"><i class="fa fa-heart-o"></i></a></li>
+                                            <li><a class="links-details" href="single-product.html"><i class="fa fa-heart"></i></a></li>
                                             <li><a class="quick-view" data-toggle="modal" data-target="#exampleModalCenter" href="#"><i class="fa fa-eye"></i></a></li>
                                         </ul>
                                     </div>
@@ -503,7 +510,7 @@
                         <span> $1209.00</span>
                     </p>
                     <div class="default-btn">
-                        <a href="shop-left-sidebar.html" class="links">Shopping Now</a>
+                        <a href="{{route('shop')}}" class="links">Shopping Now</a>
                     </div>
                 </div>
                 <!-- Li's Static Home Content Area End Here -->
@@ -853,11 +860,11 @@
                                 <span class="product-details-ref">Warehouse: <span id="modalProductRef">demo_15</span></span>
                                 <div class="rating-box pt-20">
                                     <ul class="rating rating-with-review-item">
-                                        <li><i class="fa fa-star-o" id="star-1"></i></li>
-                                        <li><i class="fa fa-star-o" id="star-2"></i></li>
-                                        <li><i class="fa fa-star-o" id="star-3"></i></li>
-                                        <li><i class="fa fa-star-o" id="star-4"></i></li>
-                                        <li><i class="fa fa-star-o" id="star-5"></i></li>
+                                        <li><i class="fa fa-star" id="star-1"></i></li>
+                                        <li><i class="fa fa-star" id="star-2"></i></li>
+                                        <li><i class="fa fa-star" id="star-3"></i></li>
+                                        <li><i class="fa fa-star" id="star-4"></i></li>
+                                        <li><i class="fa fa-star" id="star-5"></i></li>
                                         <li class="review-item"><a href="#" id="read-review">Read Review</a></li>
                                         <li class="review-item"><a href="#" id="write-review">Write Review</a></li>
                                     </ul>
@@ -889,7 +896,7 @@
                                     </form>
                                 </div>
                                 <div class="product-additional-info pt-25">
-                                    <a class="wishlist-btn" href="wishlist.html"><i class="fa fa-heart-o"></i>Add to wishlist</a>
+                                    <a class="wishlist-btn" href="wishlist.html"><i class="fa fa-heart"></i>Add to wishlist</a>
                                     <div class="product-social-sharing pt-25">
                                         <ul>
                                             <li class="facebook"><a href="#"><i class="fa fa-facebook"></i>Facebook</a></li>

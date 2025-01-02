@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\UploadController;
 
+use App\Http\Controllers\ChatbotController;
 use App\Http\Controllers\Page\AboutController;
 use App\Http\Controllers\Page\BlogController;
 use App\Http\Controllers\Page\CartController;
@@ -186,3 +187,4 @@ Route::get('/profile/order', [ProfileController::class, 'order'])->name('my_orde
 Route::post('/update-profile', [ProfileController::class, 'updateProfile'])->name('profile.update');
 Route::get('order/search', [AdminOderController::class, 'search'])->name('search.order');
 Route::get('/check_out/', [CheckOutController::class, 'index'])->name('check_out');
+Route::get('/chat', [ChatbotController::class, 'chat']);
