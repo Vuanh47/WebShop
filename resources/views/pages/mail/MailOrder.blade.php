@@ -28,7 +28,7 @@
     <p>SubTotal Price: <strong>{{ formatCurrency($orderDetails->first()->order->subtotal) }}</strong></p>
     <p>Discount: 
         <strong>
-            {{ formatCurrency($orderDetails->first()->order->discount) }}
+            {{ ($orderDetails->first()->order->discount) }}
             @if($orderDetails->first()->order->type == 'percentage')
                 %
             @else

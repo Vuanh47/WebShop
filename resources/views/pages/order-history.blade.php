@@ -79,6 +79,7 @@
                         @if ($index == 0) <!-- Chỉ hiển thị Details Button cho lần đầu tiên -->
                             <td rowspan="{{ count($orderDetails) }}">
                                 <a href="{{ route('order_details', $orderDetails->first()->order_id) }}" class="btn btn-primary btn-sm">View</a>
+
                             </td>
                         @endif
                     </tr>

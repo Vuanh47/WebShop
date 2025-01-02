@@ -57,11 +57,11 @@
     <p><span class="label">TỔNG CỘNG:</span> <span class="value">{{ formatCurrency($order->subtotal) }}</span></p>
     <p>
         <span class="label">GIẢM GIÁ:</span> 
-        <span class="value">{{ $order->discount }}
+        
             @if($orderDetails->first()->order->type == 'percentage')
-                %
+            <span class="value">{{ $order->discount }}%
             @else
-                VND
+            <span class="value">{{ formatCurrency($order->discount) }}
             @endif
         </span>
     </p>

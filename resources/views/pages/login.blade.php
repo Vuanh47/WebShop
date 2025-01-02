@@ -7,6 +7,7 @@
         <div class="row justify-content-center">
             <div class="col-sm-12 col-md-12 col-xs-12 col-lg-6 mb-0" id="login-container">
                 <!-- Login Form -->
+
                 <form action="{{ route('store') }}" method="post" id="login">
                     @csrf
                     <div class="login-form">
@@ -28,7 +29,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6 mt-10 mb-20 text-left text-md-right">
-                                <a href="#">Forgotten password?</a><br>
+                                <a href="{{route('forget_password')}}">Forgotten password?</a><br>
                                 <p style="display: inline;">New Shop? 
                                     <a href="#register" style="color: #0058ff;">Sign Up</a>
                                 </p>

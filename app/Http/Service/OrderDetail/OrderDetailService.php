@@ -31,7 +31,22 @@ class OrderDetailService {
     }
     
     
-
+    public function get4()
+    {
+        $customerID = session('customerID');
+    
+        $orderDetails = OrderDetail::where('customer_id', $customerID)
+            ->with(['order', 'product']) 
+            ->orderBy('created_at', 'desc')
+            ->paginate(4); // Phân trang 10 bản ghi mỗi trang
+    
+            $groupedOrderDetails = $orderDetails->getCollection()->groupBy('order_id');
+    
+        // Gắn tập hợp đã nhóm lại vào collection
+        $orderDetails->setCollection($groupedOrderDetails);
+    
+        return $orderDetails;
+    }
  
 
     

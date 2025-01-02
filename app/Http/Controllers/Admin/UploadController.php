@@ -10,24 +10,30 @@ class UploadController extends Controller
 {
     public function update(Request $request)
     {
-        if ($request->hasFile('thumb')) {
-            $file = $request->file('thumb');
-            $filename = time() . '.' . $file->getClientOriginalExtension();
-            $path = $file->storeAs('uploads', $filename, 'public');
-            $thumb = str_replace('uploads/', '', $path);
+        try {
+            if ($request->hasFile('thumb')) {
+                $file = $request->file('thumb');
+                $filename = time() . '.' . $file->getClientOriginalExtension();
+                $path = $file->storeAs('uploads', $filename, 'public');
+                $thumb = str_replace('uploads/', '', $path);
+
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Ảnh đã được tải lên thành công!',
+                    'filePath' => $path,
+                    'thumb' => $thumb,
+                ]);
+            }
+
             return response()->json([
-                'success' => 'Ảnh đã được tải lên thành công!',
-                'filePath' => $path,
-                'thumb' => $thumb
-            ]);
+                'success' => false,
+                'message' => 'Không tìm thấy file để upload!',
+            ], 400);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Đã xảy ra lỗi: ' . $e->getMessage(),
+            ], 500);
         }
-    
-        return response()->json(['error' => 'Không tìm thấy file!'], 400);
     }
-    
 }
-
-
-
-
-

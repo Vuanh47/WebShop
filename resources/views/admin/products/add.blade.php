@@ -145,7 +145,7 @@
                   // Cập nhật giao diện để hiển thị ảnh
                     const imageUrl = '/storage/' + data.filePath; // Đường dẫn ảnh
                     console.log(data.filePath);
-
+                    
                     // Cập nhật background-image của div#imagePreview
                     document.getElementById('imagePreview').style.backgroundImage = 'url(' + imageUrl + ')';
 

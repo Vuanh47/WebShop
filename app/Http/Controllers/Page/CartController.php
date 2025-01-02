@@ -6,6 +6,7 @@ use App\Http\Service\Cart\CartService;
 use App\Http\Service\Menu\MenuService;
 use App\Http\Service\Product\ProductService;
 use App\Models\Cart;
+use App\Models\Customer;
 use App\Models\Product;
 use App\Models\Voucher;
 use App\Models\Wishlist;
@@ -30,6 +31,7 @@ class CartController{
     }
     public function index(){
         $customerID = session('customerID');
+        $customer = Customer::find($customerID);
         $count = Wishlist::where('customer_id', $customerID)->count();
         $total = Cart::where('customer_id', $customerID)->sum('total');
         $count_cart = cart::where('customer_id',$customerID)->count();
@@ -37,6 +39,7 @@ class CartController{
             'title' => 'Shopping Cart',
             'menus' => $this->menuService->getParent(),
             'carts' => $this->cartService->getAll(),
+            'customer' => $customer,
             'subtotal' => 0,
             'discount' => 0, 
             'type' =>0,         

@@ -11,7 +11,7 @@
         </div> <!--end::Header--> 
 
         <!--begin::Form-->
-        <form action="" method="post"> 
+        <form action="{{route('menu.store')}}" method="post"> 
             <!--begin::Body-->
             <div class="card-body">
                 <div class="form-group mb-3"> 

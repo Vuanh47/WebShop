@@ -39,11 +39,11 @@
                                                 @for ($i = 1; $i <= 5; $i++)
                                                     <li>
                                                         @if ($rating >= $i)
-                                                            <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star text-warning"></i>
                                                         @elseif ($rating >= $i - 0.5 && $rating < $i)
-                                                            <i class="fa fa-star-half-o"></i>
+                                                            <i class="fa fa-star-half"></i>
                                                         @else
-                                                            <i class="fa fa-star-o"></i>
+                                                        <i class="far fa-star" style="color:rgb(243, 196, 25);"></i>
                                                         @endif
                                                     </li>
                                                 @endfor
@@ -56,7 +56,7 @@
 
                                                 <div class="li-blog-meta small text-muted" style="font-size: 16px;">
                                                     <i class="fa fa-user"></i> {{ $product->blogs->count() > 0 ? $product->blogs->count() : '0' }}
-                                                    <i class="fa fa-comment-o ml-3"></i> {{ $latestBlog->customer ? $latestBlog->customer->name : 'Unknown' }} 
+                                                    <i class="fa fa-comment ml-3"></i> {{ $latestBlog->customer ? $latestBlog->customer->name : 'Unknown' }} 
                                                     <i class="fa fa-calendar ml-3"></i> {{ $latestBlog ? $latestBlog->created_at->format('d/m/Y') : 'N/A' }}
                                                 </div>
                                                 <p class="read-more" style="font-size: 16px;">Đọc thêm...</p>
